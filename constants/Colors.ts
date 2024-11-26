@@ -1,4 +1,4 @@
-const color ={
+export  const Colors ={
   mainBlue:"rgba(0, 127, 255, 0.5)",
-  secondaryBlue:""
+  secondaryBlue:"#33A1FF"
 }

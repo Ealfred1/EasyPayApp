@@ -34,6 +34,7 @@ export default function Rootlayout() {
   }, [loaded, error]);
 
   if (!loaded && !error) {
+    console.log("error");
     return null;
   }
 
@@ -47,7 +48,7 @@ export default function Rootlayout() {
       ></Stack.Screen>
 
       <Stack.Screen
-        name="Index"
+        name="index"
         options={{
           headerShown: false,
         }}

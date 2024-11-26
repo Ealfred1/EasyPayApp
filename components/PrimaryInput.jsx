@@ -1,0 +1,33 @@
+import React from "react";
+import { Text, TextInput, View } from "react-native";
+import { Fonts } from "../constants/Fonts";
+import { Colors } from "../constants/Colors";
+
+export default function PrimaryInput(props) {
+  return (
+    <View
+      style={{
+        marginVertical: 10,
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 10,
+          fontFamily: Fonts.semiBold,
+          opacity: 0.7,
+        }}
+      >
+        {props.inputText}
+      </Text>
+      <TextInput
+        {...props}
+        style={{
+          fontSize: 12,
+          borderRadius: 14,
+          borderColor: Colors.secondaryBlue,
+          borderWidth: 1,
+        }}
+      ></TextInput>
+    </View>
+  );
+}

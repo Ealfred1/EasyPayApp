@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import PrimaryButton from "../../components/PrimaryButton";
 import CustomizableMainText from "../../components/CustomizableMainText";
@@ -10,6 +17,7 @@ import TransactionCard from "../../components/TransactionCard";
 import { Entypo, Feather } from "@expo/vector-icons";
 import Card from "../../components/Card";
 import MainText from "../../components/MainText";
+import { router } from "expo-router";
 
 export default function Dashboard() {
   const [childDimensions, setChildDimensions] = useState({
@@ -43,8 +51,9 @@ export default function Dashboard() {
             <CustomizableMainText
               style={{
                 // fontFamily: Fonts.BoldText,
-                fontSize: 15,
-                opacity: 0.8,
+                fontSize: 20,
+                fontFamily: Fonts.BoldText,
+                // opacity: 0.8,
               }}
             >
               Hello! 👋
@@ -53,13 +62,14 @@ export default function Dashboard() {
             <CustomizableMainText
               style={{
                 fontFamily: "Poppins_600SemiBold",
-                fontSize: 14,
+                fontSize: 15,
+                opacity: 0.9,
               }}
             >
               Masterpiece Ayobami
             </CustomizableMainText>
 
-            <CustomizableMainText
+            {/* <CustomizableMainText
               style={{
                 // color: "grey",
                 // fontFamily: Fonts.BoldText,
@@ -67,7 +77,7 @@ export default function Dashboard() {
               }}
             >
               Explore your Dashboard
-            </CustomizableMainText>
+            </CustomizableMainText> */}
 
             <CustomizableMainText
               style={{
@@ -90,11 +100,12 @@ export default function Dashboard() {
             <View
               style={{
                 flexDirection: "row",
-                gap: 3,
+                gap: 5,
               }}
             >
               <PrimaryButton
                 btnText="Fund your wallet"
+                smallBtn={true}
                 style={{
                   flex: 1,
 
@@ -103,20 +114,21 @@ export default function Dashboard() {
               >
                 <Entypo
                   name="wallet"
-                  size={17}
+                  size={15}
                   color={"white"}
                   style={{}}
                 ></Entypo>
               </PrimaryButton>
               <PrimaryButton
-                btnText={"Upgarde Account"}
+                btnText={"Upgrade Account"}
+                smallBtn={true}
                 style={{
                   flex: 1,
                 }}
               >
                 <Feather
                   name="arrow-up"
-                  size={17}
+                  size={15}
                   color={"white"}
                   style={{}}
                 ></Feather>
@@ -202,24 +214,30 @@ export default function Dashboard() {
                 "Cable",
               ].map((i, index) => {
                 return (
-                  <View
+                  <TouchableOpacity
                     key={index}
-                    style={{
-                      alignItems: "center",
+                    onPress={() => {
+                      router.push("/DataScreen");
                     }}
                   >
                     <View
                       style={{
-                        width: width / 6,
-                        height: width / 6,
-                        borderRadius: width / 6 / 2,
-                        backgroundColor: "black",
-                        marginVertical: 10,
-                        padding: 10,
+                        alignItems: "center",
                       }}
-                    ></View>
-                    <MainText>{i}</MainText>
-                  </View>
+                    >
+                      <View
+                        style={{
+                          width: width / 6,
+                          height: width / 6,
+                          borderRadius: width / 6 / 2,
+                          backgroundColor: "black",
+                          marginVertical: 10,
+                          padding: 10,
+                        }}
+                      ></View>
+                      <MainText>{i}</MainText>
+                    </View>
+                  </TouchableOpacity>
                 );
               })}
             </View>

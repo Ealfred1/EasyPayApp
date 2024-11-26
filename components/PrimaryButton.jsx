@@ -1,8 +1,9 @@
 import React from "react";
 import { Pressable, Text, View } from "react-native";
 import CustomizableMainText from "./CustomizableMainText";
+import { Fonts } from "../constants/Fonts";
 
-export default function PrimaryButton({ children, style, btnText }) {
+export default function PrimaryButton({ children, style, btnText, smallBtn }) {
   return (
     <View
       style={[
@@ -21,7 +22,7 @@ export default function PrimaryButton({ children, style, btnText }) {
             backgroundColor: "#33A1FF",
             borderRadius: 40,
             paddingVertical: 5,
-            // paddingHorizontal: 5,
+            paddingHorizontal: 10,
 
             justifyContent: "center",
             alignItems: "center",
@@ -29,22 +30,22 @@ export default function PrimaryButton({ children, style, btnText }) {
         }}
         android_ripple={{
           color: "white",
-          radius: 100,
+          radius: 700,
           // borderless: true,
         }}
       >
         <View
           style={{
             flexDirection: "row",
-            alignItems: "baseline",
+            alignItems: "center",
             gap: 5,
           }}
         >
           <CustomizableMainText
             style={{
-              fontFamily: "Poppins_700Bold",
+              fontFamily: Fonts.BoldText,
               color: "white",
-              fontSize: 10,
+              fontSize: smallBtn ? 10 : 12,
             }}
           >
             {btnText}
