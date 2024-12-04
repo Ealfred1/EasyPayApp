@@ -37,6 +37,7 @@ export default function ReferScreen() {
           style={{
             fontFamily: Fonts.BoldText,
             fontSize: 14,
+            color: "black",
           }}
         >
           Refer a friend, Earn a reward
@@ -46,6 +47,7 @@ export default function ReferScreen() {
             opacity: 0.7,
             fontFamily: Fonts.regularText,
             textAlign: "center",
+            color: "black",
           }}
         >
           Invite a friend to signup and make a purchase Earn ₦10 on every

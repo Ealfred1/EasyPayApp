@@ -3,20 +3,27 @@ import { Pressable, Text, View } from "react-native";
 import CustomizableMainText from "./CustomizableMainText";
 import { Fonts } from "../constants/Fonts";
 
-export default function PrimaryButton({ children, style, btnText, smallBtn }) {
+export default function PrimaryButton({
+  children,
+  style,
+  btnText,
+  smallBtn,
+  onPress,
+}) {
   return (
     <View
       style={[
         {
           borderRadius: 40,
           overflow: "hidden",
-          marginVertical: 10,
+          marginVertical: 20,
           // backgroundColor: "red",
         },
         style,
       ]}
     >
       <Pressable
+        onPress={onPress}
         style={({ pressed }) => {
           return {
             backgroundColor: "#33A1FF",

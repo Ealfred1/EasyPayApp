@@ -19,7 +19,12 @@ import { Picker } from "@react-native-picker/picker";
 export default function BuyData() {
   const [network, setNetwork] = useState(null);
   const networks = [
-    { id: "1", name: "MTN", logo: <Mtn width={50} height={50}></Mtn> },
+    {
+      id: "1",
+      name: "MTN",
+      color: "",
+      logo: <Mtn width={50} height={50}></Mtn>,
+    },
     {
       id: "2",
       name: "AIRTEL",
@@ -40,6 +45,7 @@ export default function BuyData() {
           fontSize: 16,
           opacity: 0.7,
           fontFamily: Fonts.BoldText,
+          color: "black",
         }}
       >
         Select Your Network

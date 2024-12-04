@@ -8,7 +8,7 @@ export default function CustomizableMainText({ style, children }) {
         {
           fontSize: 12,
           fontFamily: "Poppins_400Regular",
-          color: "black",
+          color: "#FFFFFF",
           marginVertical: 7,
         },
         style,

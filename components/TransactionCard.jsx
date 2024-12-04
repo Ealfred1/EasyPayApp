@@ -4,15 +4,19 @@ import { PlatformColor, View } from "react-native";
 import CustomizableMainText from "./CustomizableMainText";
 import { Fonts } from "../constants/Fonts";
 import { Platform } from "react-native";
-
+import { Colors } from "@/constants/Colors";
 export default function TransactionCard() {
   return (
     <Card
       style={{
         backgroundColor: "white",
-        borderColor: "#33A1FF",
+        borderColor: "#D3D3D3",
         borderWidth: 1,
+        // borderColor: "white",
+
         padding: 10,
+        marginVertical: 3,
+        borderRadius: 10,
       }}
     >
       <View
@@ -40,6 +44,7 @@ export default function TransactionCard() {
               style={{
                 marginVertical: 0,
                 fontFamily: "Poppins_600SemiBold",
+                color: "black",
               }}
             >
               Airtime
@@ -64,7 +69,7 @@ export default function TransactionCard() {
           <CustomizableMainText
             style={{
               marginVertical: 0,
-              fontFamily: "Poppins_600SemiBold",
+              fontFamily: Fonts.regularText,
               color: Platform.select({
                 android: PlatformColor("@android:color/holo_red_light"),
                 ios: PlatformColor("systemRed"),

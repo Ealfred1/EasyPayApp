@@ -34,6 +34,7 @@ export default function AirtimePurchase() {
           fontSize: 16,
           opacity: 0.7,
           fontFamily: Fonts.BoldText,
+          color: "black",
         }}
       >
         Select Your Network

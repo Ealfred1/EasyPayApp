@@ -53,6 +53,34 @@ export default function Rootlayout() {
           headerShown: false,
         }}
       ></Stack.Screen>
+      <Stack.Screen
+        name="ElectricityPayment"
+        options={{
+          headerShown: true,
+          headerTitle: "Electricity Bill Payment",
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="login"
+        options={{
+          headerShown: false,
+          // headerTitle: "Electricity Bill Payment",
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="register"
+        options={{
+          headerShown: false,
+          // headerTitle: "Electricity Bill Payment",
+        }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name="forgetpassword"
+        options={{
+          headerShown: false,
+          // headerTitle: "Electricity Bill Payment",
+        }}
+      ></Stack.Screen>
     </Stack>
   );
 }

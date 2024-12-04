@@ -12,7 +12,7 @@ export default function PrimaryInput(props) {
     >
       <Text
         style={{
-          fontSize: 10,
+          fontSize: 12,
           fontFamily: Fonts.semiBold,
           opacity: 0.7,
         }}
@@ -23,7 +23,7 @@ export default function PrimaryInput(props) {
         {...props}
         style={{
           fontSize: 12,
-          borderRadius: 14,
+          borderRadius: 12,
           borderColor: Colors.secondaryBlue,
           borderWidth: 1,
         }}

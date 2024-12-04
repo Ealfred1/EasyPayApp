@@ -17,12 +17,13 @@ export default function ScreenLayout({ children, whitebg }) {
         <StatusBar style="dark"></StatusBar>
         <ScrollView
           style={{
-            flex: 1,
+            // flex: 1,
             padding: 10,
-            backgroundColor: whitebg && "white",
+            backgroundColor: "white",
           }}
           contentContainerStyle={{
             paddingBottom: 40,
+            // flex: 1,
           }}
           showsVerticalScrollIndicator={false}
         >

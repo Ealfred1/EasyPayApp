@@ -7,7 +7,7 @@ export default function MainText({ children }) {
       style={{
         fontSize: 12,
         fontFamily: "Poppins_400Regular",
-        color: "black",
+        color: "#FFFFFF",
         marginVertical: 4,
         // opacity: 0.7,
       }}
