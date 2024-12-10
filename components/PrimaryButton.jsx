@@ -8,7 +8,9 @@ export default function PrimaryButton({
   style,
   btnText,
   smallBtn,
+  disabled,
   onPress,
+  btnbcgstyle,
 }) {
   return (
     <View
@@ -24,16 +26,20 @@ export default function PrimaryButton({
     >
       <Pressable
         onPress={onPress}
+        disabled={disabled}
         style={({ pressed }) => {
-          return {
-            backgroundColor: "#33A1FF",
-            borderRadius: 40,
-            paddingVertical: 5,
-            paddingHorizontal: 10,
+          return [
+            {
+              backgroundColor: disabled ? "black" : "#33A1FF",
+              borderRadius: 40,
+              paddingVertical: 5,
+              paddingHorizontal: 10,
 
-            justifyContent: "center",
-            alignItems: "center",
-          };
+              justifyContent: "center",
+              alignItems: "center",
+            },
+            btnbcgstyle,
+          ];
         }}
         android_ripple={{
           color: "white",

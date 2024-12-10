@@ -1,7 +1,9 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
+  ActivityIndicator,
   Dimensions,
+  Modal,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -21,10 +23,27 @@ import MainText from "../../components/MainText";
 
 import actionConfig from "../../Utils/DashboardItem";
 import { useRouter } from "expo-router";
+import { useContext, useEffect } from "react";
+
+import { DashboardContext } from "../../context/DashboardContext";
+// import Swal from "sweetalert2"; // SweetAlert2 for modals
+
+import { createAuthAxios } from "@/api/authAxios";
+import authAxios from "@/api/authAxios";
 
 export default function Dashboard() {
+  const authAxios = createAuthAxios();
+
+  const { user, loading } = useContext(DashboardContext);
+  const [isPinModalOpen, setIsPinModalOpen] = useState(false);
+  const navigate = useRouter(); // To navigate the user to the settings page
+  const router = navigate;
+  useEffect(() => {
+    if (user && user?.pin === null) {
+      setIsPinModalOpen(true);
+    }
+  }, [user, navigate]);
   const screenWidth = Dimensions.get("window").width;
-  const router = useRouter();
 
   let itemsPerRow;
   if (screenWidth <= 480) {
@@ -42,6 +61,80 @@ export default function Dashboard() {
 
   return (
     <ScreenLayout whitebg={true}>
+      <Modal
+        visible={isPinModalOpen}
+        transparent={true}
+        statusBarTranslucent={true}
+      >
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+
+            justifyContent: "center",
+            padding: 20,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "white",
+              // minHeight: "50%",
+              paddingVertical: 40,
+              borderRadius: 20,
+              padding: 5,
+              justifyContent: "space-between",
+            }}
+          >
+            <CustomizableMainText
+              style={{
+                color: "black",
+                textAlign: "center",
+                fontSize: 17,
+                fontFamily: Fonts.BoldText,
+              }}
+            >
+              Set Your PIN
+            </CustomizableMainText>
+            <CustomizableMainText
+              style={{
+                color: "black",
+                textAlign: "center",
+                fontSize: 12,
+                fontFamily: Fonts.regularText,
+              }}
+            >
+              You currently don’t have a PIN set. Would you like to create one?
+            </CustomizableMainText>
+            <View
+              style={{
+                flexDirection: "row",
+                gap: 3,
+              }}
+            >
+              <PrimaryButton
+                btnText={"Set Pin"}
+                style={{
+                  flex: 1,
+                }}
+                onPress={() => {
+                  setIsPinModalOpen(false);
+                  router.push("/mainSidescreens/settings");
+                }}
+              ></PrimaryButton>
+              <PrimaryButton
+                btnText={"Cancel"}
+                onPress={() => {
+                  setIsPinModalOpen(false);
+                }}
+                style={{
+                  flex: 1,
+                }}
+                btnbcgstyle={{ backgroundColor: "red" }}
+              ></PrimaryButton>
+            </View>
+          </View>
+        </View>
+      </Modal>
       <Card>
         <CustomizableMainText
           style={{
@@ -61,7 +154,11 @@ export default function Dashboard() {
             opacity: 0.9,
           }}
         >
-          Masterpiece Ayobami
+          {loading && !user ? (
+            <ActivityIndicator color={"white"} size={20}></ActivityIndicator>
+          ) : (
+            `${user?.first_name} ${user?.last_name}`
+          )}
         </CustomizableMainText>
 
         <CustomizableMainText
@@ -79,7 +176,7 @@ export default function Dashboard() {
             marginTop: 5,
           }}
         >
-          ₦ 0.00
+          ₦ {loading && !user ? "Getting data..." : ""} {user?.balance}
         </CustomizableMainText>
 
         <View
@@ -140,7 +237,14 @@ export default function Dashboard() {
                 marginTop: 5,
               }}
             >
-              7011173711
+              {loading || !user ? (
+                <ActivityIndicator
+                  color={"white"}
+                  size={20}
+                ></ActivityIndicator>
+              ) : (
+                user?.account_num || user.phone_number
+              )}
             </CustomizableMainText>
           </View>
 
@@ -245,11 +349,6 @@ export default function Dashboard() {
         >
           Recent Funding Transactions
         </CustomizableMainText>
-        <TransactionCard></TransactionCard>
-        <TransactionCard></TransactionCard>
-        <TransactionCard></TransactionCard>
-        <TransactionCard></TransactionCard>
-        <TransactionCard></TransactionCard>
         <TransactionCard></TransactionCard>
       </View>
     </ScreenLayout>
