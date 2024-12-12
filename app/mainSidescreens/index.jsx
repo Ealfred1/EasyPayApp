@@ -30,6 +30,7 @@ import { DashboardContext } from "../../context/DashboardContext";
 
 import { createAuthAxios } from "@/api/authAxios";
 import authAxios from "@/api/authAxios";
+import TransactionSection from "../../components/TransactionSection";
 
 export default function Dashboard() {
   const authAxios = createAuthAxios();
@@ -337,20 +338,7 @@ export default function Dashboard() {
         </View>
       </Card>
 
-      <View>
-        {/* transactions section */}
-
-        <CustomizableMainText
-          style={{
-            fontFamily: Fonts.BoldText,
-            fontSize: 15,
-            color: "black",
-          }}
-        >
-          Recent Funding Transactions
-        </CustomizableMainText>
-        <TransactionCard></TransactionCard>
-      </View>
+      <TransactionSection></TransactionSection>
     </ScreenLayout>
   );
 }

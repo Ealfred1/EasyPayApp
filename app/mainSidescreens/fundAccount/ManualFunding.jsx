@@ -8,13 +8,77 @@ import CustomizableMainText from "../../../components/CustomizableMainText";
 import { Fonts } from "../../../constants/Fonts";
 import ImagePickerComponent from "../../../components/ImagePicker";
 import { Colors } from "../../../constants/Colors";
-
+import { useRouter } from "expo-router";
+import { createAuthAxios } from "../../../api/authAxios";
 export default function ManualFunding() {
   const [selectedImage, setSelectedImage] = useState(null);
+  const navigate = useRouter;
+  const authAxios = createAuthAxios();
+  const [amount, setAmount] = useState("");
+
+  const [loading, setLoading] = useState(false);
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    console.log("fuck");
+
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append("amount", amount);
+    formData.append("path", selectedImage);
+    formData.append("action", "manual_funding");
+    console.log(formData);
+
+    authAxios
+      .post("/upload/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log("Success:", res.data);
+
+        setLoading(false);
+        Swal.fire({
+          title: "Upload successfull!",
+          text: `Your reciept has been uploaded successfully your reference id: #${res.data.reference_id}`,
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonText: "OK",
+        }).then(() => {
+          // Redirect to the desired page
+          navigate("/mainSidescreen/index"); // Replace with your actual route path
+        });
+      })
+      .catch((err) => {
+        console.log("hmm");
+
+        console.error(err);
+        setLoading(false);
+      });
+  };
+
+  // Handle file upload
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      setImage(file);
+    } else {
+      alert("Please upload a valid image file.");
+    }
+  };
 
   return (
     <ScreenLayout>
-      <PrimaryInput inputText="Amount" keyboardType="numeric"></PrimaryInput>
+      <PrimaryInput
+        inputText="Amount"
+        keyboardType="numeric"
+        onChangeText={(e) => {
+          setAmount(e);
+        }}
+        value={amount}
+      ></PrimaryInput>
       <View>
         <CustomizableMainText
           style={{
@@ -91,7 +155,11 @@ export default function ManualFunding() {
       >
         *Enter an amount and upload a screenshot of your receipt.
       </CustomizableMainText>
-      <PrimaryButton btnText={"Submit"}></PrimaryButton>
+      <PrimaryButton
+        btnText={"Submit"}
+        disabled={loading}
+        onPress={handleSubmit}
+      ></PrimaryButton>
     </ScreenLayout>
   );
 }

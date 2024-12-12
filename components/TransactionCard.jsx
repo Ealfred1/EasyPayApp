@@ -5,7 +5,9 @@ import CustomizableMainText from "./CustomizableMainText";
 import { Fonts } from "../constants/Fonts";
 import { Platform } from "react-native";
 import { Colors } from "@/constants/Colors";
-export default function TransactionCard() {
+import { format } from "date-fns";
+export default function TransactionCard(transaction) {
+  const { amount, date_created, remark, status } = transaction;
   return (
     <Card
       style={{
@@ -47,7 +49,8 @@ export default function TransactionCard() {
                 color: "black",
               }}
             >
-              Airtime
+              {/* Airtime */}
+              {remark}
             </CustomizableMainText>
             <CustomizableMainText
               style={{
@@ -56,7 +59,7 @@ export default function TransactionCard() {
                 color: "grey",
               }}
             >
-              Nov 14, 12:00 PM
+              {format(new Date(date_created), "MMM dd, h:mm a")}
             </CustomizableMainText>
           </View>
         </View>
@@ -76,7 +79,7 @@ export default function TransactionCard() {
               }),
             }}
           >
-            - ₦100.00
+            {status === "Failed" ? "-" : ""} ₦{amount}
           </CustomizableMainText>
           <CustomizableMainText
             style={{
@@ -85,7 +88,7 @@ export default function TransactionCard() {
               color: "grey",
             }}
           >
-            Deposit
+            {status}
           </CustomizableMainText>
         </View>
       </View>
