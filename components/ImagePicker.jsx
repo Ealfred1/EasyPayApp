@@ -28,12 +28,14 @@ const ImagePickerComponent = ({ onImageSelected, selectedImage }) => {
       allowsEditing: true,
       aspect: [4, 3], // Optional: Crop aspect ratio
       quality: 1, // Image quality (0 to 1)
+      includeBase64: true,
     });
 
     if (!result.canceled) {
-      onImageSelected(result.assets[0].uri); // Pass the selected image URI to the parent
+      onImageSelected(result.assets[0]); // Pass the selected image URI to the parent
     }
   };
+  console.log(selectedImage);
 
   return (
     <Card

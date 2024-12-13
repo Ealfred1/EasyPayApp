@@ -15,18 +15,22 @@ export default function ManualFunding() {
   const navigate = useRouter;
   const authAxios = createAuthAxios();
   const [amount, setAmount] = useState("");
+  console.log(selectedImage, "main");
 
   const [loading, setLoading] = useState(false);
 
   // Handle form submission
   const handleSubmit = (e) => {
-    console.log("fuck");
-
     setLoading(true);
 
     const formData = new FormData();
     formData.append("amount", amount);
-    formData.append("path", selectedImage);
+    formData.append("path", {
+      uri: selectedImage?.uri, // The image file's URI
+      type: selectedImage?.type, // The MIME type (e.g., 'image/jpeg')
+      // name: fileName || "upload.jpg", // File name (default to 'upload.jpg' if unavailable)
+    });
+
     formData.append("action", "manual_funding");
     console.log(formData);
 
@@ -94,7 +98,7 @@ export default function ManualFunding() {
 
         <ImagePickerComponent
           onImageSelected={setSelectedImage}
-          selectedImage={selectedImage}
+          selectedImage={selectedImage?.uri}
         ></ImagePickerComponent>
       </View>
       <View>
