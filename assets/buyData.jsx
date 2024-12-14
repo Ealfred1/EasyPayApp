@@ -6,13 +6,12 @@ import {
   TextInput, 
   ScrollView, 
   ActivityIndicator, 
-  StyleSheet,
-  Alert 
+  StyleSheet 
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createAuthAxios } from '../../api/authAxios';
-import Toast from 'react-native-toast-message';
+import { createAuthAxios } from '../../api/authAxios'
+import { Toast } from 'react-native-toast-message';
+import Swal from 'sweetalert2';
 
 // Import SVG logos
 import Mtn from '@/assets/mtn.svg';
@@ -26,7 +25,7 @@ import MainHeader from '../../components/MainHeader';
 import CustomizableMainText from '../../components/CustomizableMainText';
 import PrimaryInput from '../../components/PrimaryInput';
 import PrimaryButton from '../../components/PrimaryButton';
-import PinPopup from '../../components/PinPopup';
+import PinPopup from '../../components/Auth/PinPopup';
 
 const DataPage = () => {
   const authAxios = createAuthAxios();
@@ -50,22 +49,11 @@ const DataPage = () => {
     { id: '4', name: 'GLO', logo: Glo },
   ];
 
-  const handleAutoFill = async () => {
-    try {
-      const userJsonString = await AsyncStorage.getItem('user');
-      if (userJsonString) {
-        const user = JSON.parse(userJsonString);
-        if (user.phone_number) {
-          setPhoneNumber(user.phone_number);
-        }
-      }
-    } catch (error) {
-      console.error('Error retrieving user data:', error);
-      Toast.show({
-        type: 'error',
-        text1: 'Error',
-        text2: 'Could not retrieve phone number'
-      });
+  const handleAutoFill = () => {
+    // Implement auto-fill logic, similar to web version
+    const userPhoneNumber = JSON.parse(localStorage.getItem("user"))?.phone_number;
+    if (userPhoneNumber) {
+      setPhoneNumber(userPhoneNumber);
     }
   };
 
@@ -102,36 +90,20 @@ const DataPage = () => {
             text2: res.data.message
           });
         } else {
-          Alert.alert('Success!', res.data.message);
-          // Reset form after successful purchase
-          resetForm();
+          // Use a React Native compatible alert/modal
+          Swal.fire('Success!', res.data.message, 'success');
         }
       })
       .catch(err => {
         const errorMessage = err.response?.data?.message || err.message;
-        Alert.alert('Error!', errorMessage);
+        Swal.fire('Error!', errorMessage, 'error');
       })
       .finally(() => setLoading(false));
   };
 
-  const resetForm = () => {
-    setSelectedNetwork(null);
-    setPhoneNumber('');
-    setSelectedPlan(null);
-    setDataType('');
-    setAmount(0.0);
-    setMonthValidate('');
-  };
+  const handlePinError = () => setPin('');
 
-  const handlePinError = () => {
-    Toast.show({
-      type: 'error',
-      text1: 'Invalid PIN',
-      text2: 'Please enter a valid 4-digit PIN'
-    });
-    setPin('');
-  };
-
+  // Similar useEffect hooks from web version
   useEffect(() => {
     if (selectedNetwork) {
       setDataType('');
@@ -206,7 +178,7 @@ const DataPage = () => {
 
   return (
     <ScreenLayout>
-      <ScrollView keyboardShouldPersistTaps="handled">
+      <ScrollView>
         <CustomizableMainText style={styles.titleText}>
           Buy Data
         </CustomizableMainText>
@@ -225,7 +197,7 @@ const DataPage = () => {
                 }
               ]}
             >
-              {React.createElement(network.logo)}
+              {network.logo}
             </TouchableOpacity>
           ))}
         </View>
@@ -276,19 +248,16 @@ const DataPage = () => {
               const plan = dataPlans.find(p => p.dataplan_id === itemValue);
               handlePlanChange(plan);
             }}
-            enabled={!isLoading && dataPlans.length > 0}
+            enabled={!isLoading}
           >
-            {dataPlans.length === 0 ? (
-              <Picker.Item label="Select Network and Data Type First" value="" />
-            ) : (
-              dataPlans.map((plan) => (
-                <Picker.Item 
-                  key={plan.dataplan_id} 
-                  label={plan.plan} 
-                  value={plan.dataplan_id} 
-                />
-              ))
-            )}
+            <Picker.Item label="Select Data Plan" value="" />
+            {dataPlans.map((plan) => (
+              <Picker.Item 
+                key={plan.dataplan_id} 
+                label={plan.plan} 
+                value={plan.dataplan_id} 
+              />
+            ))}
           </Picker>
         </View>
 
@@ -311,7 +280,7 @@ const DataPage = () => {
         <PrimaryButton 
           btnText="Purchase" 
           onPress={handlePay}
-          disabled={loading || !selectedNetwork || !phoneNumber || !selectedPlan}
+          disabled={loading}
         />
 
         {/* Loading Indicator */}
@@ -323,7 +292,7 @@ const DataPage = () => {
           />
         )}
 
-        {/* Pin Popup */}
+        {/* Pin Modal */}
         <PinPopup 
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
@@ -383,6 +352,5 @@ const styles = StyleSheet.create({
     marginTop: 20
   }
 });
-;
 
 export default DataPage;
