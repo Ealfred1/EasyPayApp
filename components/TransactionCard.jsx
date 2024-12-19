@@ -6,8 +6,10 @@ import { Fonts } from "../constants/Fonts";
 import { Platform } from "react-native";
 import { Colors } from "@/constants/Colors";
 import { format } from "date-fns";
-export default function TransactionCard(transaction) {
+export default function TransactionCard({ transaction }) {
   const { amount, date_created, remark, status } = transaction;
+  console.log(amount);
+
   return (
     <Card
       style={{

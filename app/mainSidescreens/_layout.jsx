@@ -34,7 +34,7 @@ export default function _layout() {
           name="fundAccount"
           options={{
             headerTitle: "Fund Account",
-            headerShown: false,
+
             title: "Fund Account",
             drawerIcon: ({ color, size, focused }) => {
               return (

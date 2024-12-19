@@ -16,7 +16,7 @@ export default function ActionCard({
   linkTxt,
   onPress,
 }) {
-  console.log(onPress, "na");
+  console.log(onPress, "help");
 
   return (
     <Pressable onPress={onPress}>

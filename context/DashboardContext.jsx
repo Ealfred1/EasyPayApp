@@ -44,7 +44,7 @@ export const DashboardProvider = ({ children }) => {
   console.log(user, "fukinguser");
 
   return (
-    <DashboardContext.Provider value={{ user, loading }}>
+    <DashboardContext.Provider value={{ user, setUser, loading }}>
       {children}
     </DashboardContext.Provider>
   );

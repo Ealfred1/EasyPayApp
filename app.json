@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Payverse",
+    "name": "Easypay",
     "slug": "Payverse",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ayobami.Payverse"
     },
     "web": {
       "bundler": "metro",
@@ -24,7 +25,7 @@
     },
     "plugins": [
       "expo-router",
-        "expo-asset",
+      "expo-asset",
       [
         "expo-splash-screen",
         {
@@ -38,6 +39,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "fabbe626-9f7d-4d53-a452-5610b4aa0d76"
+      }
+    },
+    "owner": "ayobami"
   }
 }
