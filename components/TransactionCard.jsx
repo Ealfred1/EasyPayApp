@@ -4,11 +4,13 @@ import { PlatformColor, View } from "react-native";
 import CustomizableMainText from "./CustomizableMainText";
 import { Fonts } from "../constants/Fonts";
 import { Platform } from "react-native";
-import { Colors } from "@/constants/Colors";
+
 import { format } from "date-fns";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { Colors } from "../constants/Colors";
 export default function TransactionCard({ transaction }) {
-  const { amount, date_created, remark, status } = transaction;
-  console.log(amount);
+  const { amount, date_created, remark, status, credit_type } = transaction;
+  console.log(transaction);
 
   return (
     <Card
@@ -18,7 +20,7 @@ export default function TransactionCard({ transaction }) {
         borderWidth: 1,
         // borderColor: "white",
 
-        padding: 10,
+        padding: 8,
         marginVertical: 3,
         borderRadius: 10,
       }}
@@ -28,6 +30,7 @@ export default function TransactionCard({ transaction }) {
           flexDirection: "row",
 
           justifyContent: "space-between",
+          alignItems: "center",
 
           width: "100%",
         }}
@@ -36,12 +39,14 @@ export default function TransactionCard({ transaction }) {
           style={{
             flexDirection: "row",
             alignItems: "center",
+            maxWidth: "100%",
           }}
         >
           <IconCard></IconCard>
           <View
             style={{
-              marginLeft: 10,
+              marginLeft: 7,
+              maxWidth: "100%",
             }}
           >
             <CustomizableMainText
@@ -49,6 +54,9 @@ export default function TransactionCard({ transaction }) {
                 marginVertical: 0,
                 fontFamily: "Poppins_600SemiBold",
                 color: "black",
+                fontSize: 11,
+                maxWidth: "100%",
+                // backgroundColor: "red",
               }}
             >
               {/* Airtime */}
@@ -74,11 +82,14 @@ export default function TransactionCard({ transaction }) {
           <CustomizableMainText
             style={{
               marginVertical: 0,
+              fontSize: 10,
               fontFamily: Fonts.regularText,
-              color: Platform.select({
-                android: PlatformColor("@android:color/holo_red_light"),
-                ios: PlatformColor("systemRed"),
-              }),
+              color:
+                status === "Pending"
+                  ? "orange"
+                  : credit_type === "debit"
+                  ? "red"
+                  : "green",
             }}
           >
             {status === "Failed" ? "-" : ""} ₦{amount}
@@ -87,6 +98,7 @@ export default function TransactionCard({ transaction }) {
             style={{
               marginVertical: 0,
               fontSize: 10,
+
               color: "grey",
             }}
           >
@@ -102,11 +114,15 @@ const IconCard = () => {
   return (
     <View
       style={{
-        width: 40,
-        height: 40,
-        backgroundColor: "black",
-        borderRadius: 20,
+        width: 50,
+        height: 50,
+        backgroundColor: Colors.secondaryBlue,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 25,
       }}
-    ></View>
+    >
+      <FontAwesome5 name="money-bill" size={15} color="white" />
+    </View>
   );
 };

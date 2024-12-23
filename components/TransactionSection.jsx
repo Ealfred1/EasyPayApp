@@ -18,7 +18,7 @@ export default function TransactionSection() {
         // Parse, sort by date, and limit to 3 most recent transactions
         const sortedTransactions = JSON.parse(res.data.message)
           .sort((a, b) => new Date(b.date_created) - new Date(a.date_created))
-          .slice(0, 3); // Limit to 3 most recent transactions
+          .slice(0, 10); // Limit to 3 most recent transactions
         setTransactions(sortedTransactions);
         setLoading(false);
       })
@@ -27,7 +27,6 @@ export default function TransactionSection() {
         setLoading(false);
       });
   }, []);
-
   return (
     <View>
       {/* transactions section */}

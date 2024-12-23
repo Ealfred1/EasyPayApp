@@ -9,6 +9,9 @@ import { router } from "expo-router";
 import { createAuthAxios } from "../api/authAxios";
 import { AuthContext } from "../context/AuthContext";
 import SecureInput from "../components/SecureInput";
+import { Fonts } from "../constants/Fonts";
+import MainHeader from "../components/MainHeader";
+
 export default function Register() {
   const authAxios = createAuthAxios();
   const { loginUser, register, otpSent, verifyOtp, resendOtp } =
@@ -119,11 +122,22 @@ export default function Register() {
           flex: 1,
         }}
       >
+        <MainHeader
+          style={
+            {
+              // textAlign: "center",
+            }
+          }
+        >
+          Easypay
+        </MainHeader>
         <CustomizableMainText
           style={{
             color: Colors.mainTheme,
             fontSize: 20,
             textAlign: "center",
+            fontFamily: Fonts.semiBold,
+            marginTop: 30,
           }}
         >
           {otpSent ? "Enter OTP" : "Create an Account"}
@@ -133,6 +147,7 @@ export default function Register() {
             color: "black",
             opacity: 0.6,
             textAlign: "center",
+            fontSize: 12,
           }}
         >
           {otpSent

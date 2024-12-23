@@ -3,8 +3,14 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import MainHeader from "../../components/MainHeader";
-
+import { useNavigationState, useRoute } from "@react-navigation/native";
 export default function _layout() {
+  // const currentRoute = useNavigationState((state) => {
+  //   const routeIndex = state.index;
+  //   return state.routes[routeIndex].name;
+  // });
+  // console.log(currentRoute, "route");
+
   return (
     <GestureHandlerRootView
       style={{
@@ -69,7 +75,7 @@ export default function _layout() {
             headerTitle: "Cable Subscription",
             title: "Cable Sub",
             drawerIcon: ({ color, size, focused }) => {
-              return <AntDesign name="creditcard" size={size} color={color} />;
+              return <Feather name="tv" size={size} color={color} />;
             },
           }}
         ></Drawer.Screen>

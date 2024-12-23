@@ -102,6 +102,8 @@ import PrimaryInput from "../components/PrimaryInput";
 import PrimaryButton from "../components/PrimaryButton";
 import { AuthContext } from "../context/AuthContext"; // Context for login logic
 import { router } from "expo-router";
+import { Fonts } from "../constants/Fonts";
+import MainHeader from "../components/MainHeader";
 // import { toast } from "react-toastify"; // Replace with a React Native alternative if needed
 
 export default function Login() {
@@ -132,15 +134,27 @@ export default function Login() {
     <ScreenLayout>
       <View
         style={{
-          marginTop: 30,
+          justifyContent: "center",
+
           flex: 1,
         }}
       >
+        <MainHeader
+          style={
+            {
+              // textAlign: "center",
+            }
+          }
+        >
+          Easypay
+        </MainHeader>
         <CustomizableMainText
           style={{
             color: Colors.mainTheme,
             fontSize: 20,
             textAlign: "center",
+            fontFamily: Fonts.semiBold,
+            marginTop: 30,
           }}
         >
           Sign In
@@ -150,6 +164,7 @@ export default function Login() {
             color: "black",
             opacity: 0.6,
             textAlign: "center",
+            fontSize: 12,
           }}
         >
           Enter your credentials to Login to your account
@@ -175,6 +190,7 @@ export default function Login() {
           <CustomizableMainText
             style={{
               color: Colors.secondaryBlue,
+              marginVertical: 10,
             }}
           >
             Forget your Password?
@@ -184,7 +200,7 @@ export default function Login() {
         <PrimaryButton
           btnText={
             loading ? (
-              <ActivityIndicator size={20}></ActivityIndicator>
+              <ActivityIndicator size={20} color={"white"}></ActivityIndicator>
             ) : (
               "Login"
             )
@@ -193,7 +209,7 @@ export default function Login() {
           onPress={handleLogin}
         />
         <TouchableOpacity
-          style={{ marginTop: "auto" }}
+          style={{ marginTop: 20 }}
           onPress={() => {
             router.replace("/register");
           }}

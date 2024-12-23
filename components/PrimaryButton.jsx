@@ -32,8 +32,8 @@ export default function PrimaryButton({
             {
               backgroundColor: disabled ? "black" : "#33A1FF",
               borderRadius: 40,
-              paddingVertical: 5,
-              paddingHorizontal: 10,
+              paddingVertical: 8,
+              paddingHorizontal: 5,
 
               justifyContent: "center",
               alignItems: "center",
@@ -56,9 +56,9 @@ export default function PrimaryButton({
         >
           <CustomizableMainText
             style={{
-              fontFamily: Fonts.BoldText,
+              fontFamily: Fonts.semiBold,
               color: "white",
-              fontSize: smallBtn ? 10 : 12,
+              fontSize: smallBtn ? 10 : 14,
             }}
           >
             {btnText}

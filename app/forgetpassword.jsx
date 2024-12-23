@@ -142,90 +142,96 @@ export default function ForgetPassword() {
 
   return (
     <ScreenLayout>
-      <View style={{ marginTop: 30, flex: 1 }}>
-        <CustomizableMainText
-          style={{
-            color: Colors.mainTheme,
-            fontSize: 20,
-            textAlign: "center",
-          }}
-        >
-          Forget Password
-        </CustomizableMainText>
-      </View>
-
-      {step === 1 && (
-        <>
-          <PrimaryInput
-            inputText="Enter your email"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-          />
-          <PrimaryButton
-            btnText={loading ? <ActivityIndicator color="white" /> : "Submit"}
-            onPress={handleEmailSubmit}
-            disabled={loading}
-          />
-        </>
-      )}
-
-      {step === 2 && (
-        <>
-          <PrimaryInput
-            inputText="Enter the reset code"
-            value={resetCode}
-            onChangeText={(text) => setResetCode(text)}
-          />
-          <PrimaryButton
-            btnText={
-              loading ? <ActivityIndicator color="white" /> : "Verify Code"
-            }
-            onPress={handleResetCodeSubmit}
-            disabled={loading}
-          />
-        </>
-      )}
-
-      {step === 3 && (
-        <>
-          <PrimaryInput
-            inputText="Enter your new password"
-            value={newPassword}
-            onChangeText={(text) => setNewPassword(text)}
-            secureTextEntry
-          />
-          <PrimaryButton
-            btnText={
-              loading ? <ActivityIndicator color="white" /> : "Reset Password"
-            }
-            onPress={handlePasswordSubmit}
-            disabled={loading}
-          />
-        </>
-      )}
-
-      {step === 4 && (
-        <CustomizableMainText
-          style={{ textAlign: "center", color: "black", opacity: 0.7 }}
-        >
-          {message}
-        </CustomizableMainText>
-      )}
-      <TouchableOpacity
-        onPress={() => {
-          router.replace("/login");
+      <CustomizableMainText
+        style={{
+          color: Colors.mainTheme,
+          fontSize: 20,
+          textAlign: "center",
+          marginTop: "40",
         }}
       >
-        <CustomizableMainText
-          style={{
-            color: "black",
-            textAlign: "center",
-            color: Colors.secondaryBlue,
+        Forget Password
+      </CustomizableMainText>
+      <View
+        style={{
+          marginTop: "auto",
+          flex: 1,
+        }}
+      >
+        {step === 1 && (
+          <>
+            <PrimaryInput
+              inputText="Enter your email"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
+            />
+            <PrimaryButton
+              btnText={loading ? <ActivityIndicator color="white" /> : "Submit"}
+              onPress={handleEmailSubmit}
+              disabled={loading}
+            />
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <PrimaryInput
+              inputText="Enter the reset code"
+              value={resetCode}
+              onChangeText={(text) => setResetCode(text)}
+            />
+            <PrimaryButton
+              btnText={
+                loading ? <ActivityIndicator color="white" /> : "Verify Code"
+              }
+              onPress={handleResetCodeSubmit}
+              disabled={loading}
+            />
+          </>
+        )}
+
+        {step === 3 && (
+          <>
+            <PrimaryInput
+              inputText="Enter your new password"
+              value={newPassword}
+              onChangeText={(text) => setNewPassword(text)}
+              secureTextEntry
+            />
+            <PrimaryButton
+              btnText={
+                loading ? <ActivityIndicator color="white" /> : "Reset Password"
+              }
+              onPress={handlePasswordSubmit}
+              disabled={loading}
+            />
+          </>
+        )}
+
+        {step === 4 && (
+          <CustomizableMainText
+            style={{ textAlign: "center", color: "black", opacity: 0.7 }}
+          >
+            {message}
+          </CustomizableMainText>
+        )}
+        <TouchableOpacity
+          onPress={() => {
+            router.replace("/login");
           }}
         >
-          Login
-        </CustomizableMainText>
-      </TouchableOpacity>
+          <CustomizableMainText
+            style={{
+              color: "black",
+              textAlign: "center",
+              color: Colors.secondaryBlue,
+              fontSize: 14,
+            }}
+          >
+            Login
+          </CustomizableMainText>
+        </TouchableOpacity>
+      </View>
     </ScreenLayout>
   );
 }

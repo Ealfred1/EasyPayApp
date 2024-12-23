@@ -191,7 +191,7 @@ export default function EducationSubscription() {
       )}
 
       <PrimaryInput
-        inputText={"IUC Number"}
+        inputText={"Number"}
         keyboardType={"numeric"}
         value={iucNumber}
         onChangeText={(e) => {

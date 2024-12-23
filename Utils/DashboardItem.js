@@ -32,7 +32,7 @@ export default function actionConfig(i) {
       <MaterialIcons name="electric-bolt" size={20} color="rgb(168, 85, 247)" />
     );
     bgkColor = "#FAF5FF";
-    link = "/ElectricityPayment";
+    link = "/electricity";
   }
   if (i == "Education") {
     icon = <AntDesign name="book" size={20} color="rgb(236, 72, 153)" />;
@@ -40,12 +40,16 @@ export default function actionConfig(i) {
     link = "/mainSidescreens/education-subscription";
   }
   if (i == "Cable") {
-    icon = (
-      <FontAwesome5 name="money-bill" size={20} color="rgb(239, 68, 68)" />
-    );
+    icon = <Feather name="tv" size={20} color={"rgb(239, 68, 68)"} />;
     bgkColor = "#FEF2F2";
     link = "/mainSidescreens/cable-subscription";
   }
-  console.log(bgkColor);
+  if (i == "referral") {
+    icon = (
+      <MaterialIcons name="person-add" size={20} color={"rgb(239, 68, 68)"} />
+    );
+    bgkColor = "#FEF2F2";
+    link = "/mainSidescreens/refer-screen";
+  }
   return [icon, bgkColor, link];
 }

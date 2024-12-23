@@ -207,20 +207,27 @@ export default function BuyData() {
     {
       id: "1",
       name: "MTN",
-      color: "",
+      color: "#EAB308",
       logo: <Mtn width={50} height={50}></Mtn>,
     },
     {
       id: "2",
       name: "AIRTEL",
+      color: "rgb(220 38 38)",
       logo: <Airtel width={50} height={50}></Airtel>,
     },
     {
       id: "3",
       name: "9MOBILE",
       logo: <NineMobile width={50} height={50} />,
+      color: "rgb(22 163 74)",
     },
-    { id: "4", name: "GLO", logo: <Glo width={50} height={50}></Glo> },
+    {
+      id: "4",
+      name: "GLO",
+      logo: <Glo width={50} height={50}></Glo>,
+      color: "rgb(34 197 94)",
+    },
   ];
 
   return (
@@ -272,7 +279,7 @@ export default function BuyData() {
               }}
               key={item.name}
               style={{
-                backgroundColor: Colors.mainBlue,
+                backgroundColor: item.color,
                 borderRadius: 10,
                 padding: 10,
                 opacity: selectedNetwork?.name == item.name ? 1 : 0.5,
@@ -301,7 +308,7 @@ export default function BuyData() {
         >
           <Text
             style={{
-              fontSize: 10,
+              fontSize: 12,
               fontFamily: Fonts.semiBold,
               opacity: 0.7,
             }}
@@ -334,7 +341,7 @@ export default function BuyData() {
         >
           <Text
             style={{
-              fontSize: 10,
+              fontSize: 12,
               fontFamily: Fonts.semiBold,
               opacity: 0.7,
             }}

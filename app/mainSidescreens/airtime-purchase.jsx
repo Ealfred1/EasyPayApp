@@ -34,10 +34,30 @@ export default function AirtimePurchase() {
   const authAxios = createAuthAxios();
 
   const networks = [
-    { id: "1", name: "MTN", logo: <Mtn width={50} height={50} /> },
-    { id: "2", name: "AIRTEL", logo: <Airtel width={50} height={50} /> },
-    { id: "3", name: "9MOBILE", logo: <NineMobile width={50} height={50} /> },
-    { id: "4", name: "GLO", logo: <Glo width={50} height={50} /> },
+    {
+      id: "1",
+      name: "MTN",
+      color: "#EAB308",
+      logo: <Mtn width={50} height={50}></Mtn>,
+    },
+    {
+      id: "2",
+      name: "AIRTEL",
+      color: "rgb(220 38 38)",
+      logo: <Airtel width={50} height={50}></Airtel>,
+    },
+    {
+      id: "3",
+      name: "9MOBILE",
+      logo: <NineMobile width={50} height={50} />,
+      color: "rgb(22 163 74)",
+    },
+    {
+      id: "4",
+      name: "GLO",
+      logo: <Glo width={50} height={50}></Glo>,
+      color: "rgb(34 197 94)",
+    },
   ];
 
   // Create an axios instance for authenticated requests
@@ -119,9 +139,9 @@ export default function AirtimePurchase() {
               style={[
                 styles.networkButton,
                 {
-                  opacity: network === item.name ? 1 : 0.7,
+                  opacity: network === item.name ? 1 : 0.5,
 
-                  backgroundColor: Colors.mainBlue,
+                  backgroundColor: item.color,
                 },
               ]}
             >

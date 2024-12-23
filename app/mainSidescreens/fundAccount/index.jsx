@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ScreenLayout from "../../../components/ScreenLayout";
 import Card from "../../../components/Card";
 import { Pressable, Text, View } from "react-native";
@@ -33,8 +33,8 @@ export default function fundAccount() {
       <ActionCard
         bgColor={Colors.mainBlue}
         iconbgColor={Colors.secondaryBlue}
-        headerTxt={"Fund with Moniffy"}
-        mainTxt={"Fund your account via Moniffy"}
+        headerTxt={"Fund with Paystack"}
+        mainTxt={"Fund your account via Paystack"}
         onPress={() => router.push("/mainSidescreens/fundAccount/Moniffy")}
       >
         <FontAwesome5

@@ -57,10 +57,11 @@ export default function Rootlayout() {
               headerShown: false,
             }}
           ></Stack.Screen>
+
           <Stack.Screen
-            name="ElectricityPayment"
+            name="electricity"
             options={{
-              headerShown: true,
+              headerShown: false,
               headerTitle: "Electricity Bill Payment",
             }}
           ></Stack.Screen>
@@ -83,6 +84,12 @@ export default function Rootlayout() {
             options={{
               headerShown: false,
               // headerTitle: "Electricity Bill Payment",
+            }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="checkout"
+            options={{
+              headerShown: false,
             }}
           ></Stack.Screen>
         </Stack>

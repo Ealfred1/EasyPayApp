@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ScreenLayout from "../../../components/ScreenLayout";
 import CustomizableMainText from "../../../components/CustomizableMainText";
 import PrimaryInput from "../../../components/PrimaryInput";
 import PrimaryButton from "../../../components/PrimaryButton";
 import MainText from "../../../components/MainText";
 import { Fonts } from "../../../constants/Fonts";
-import { useRouter } from "expo-router";
+import { router, useRouter } from "expo-router";
 import { createAuthAxios } from "../../../api/authAxios";
 import Toast from "react-native-toast-message";
-import { Linking } from "react-native";
+import { ActivityIndicator, Linking } from "react-native";
+import { DashboardContext } from "../../../context/DashboardContext";
 
 export default function Moniffy() {
-  const navigate = useRouter();
+  const router = useRouter();
   const authAxios = createAuthAxios();
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false); // Loading state
-
+  const { user } = useContext(DashboardContext);
   const handleAmountChange = (e) => {
     const value = e;
     if (value === "") {
@@ -26,8 +27,9 @@ export default function Moniffy() {
     }
   };
 
-  const redirectToExternalUrl = (url) => {
-    Linking(url);
+  const handleCheckout = (url) => {
+    // navigate.push("/checkout", { url });
+    router.push({ pathname: "/checkout", params: { url } });
   };
 
   const handleProceed = () => {
@@ -49,14 +51,14 @@ export default function Moniffy() {
     console.log(amount, "lls");
 
     authAxios
-      .post("/monnify/", { amount })
+      .post("paystack/", { amount, email: user.email })
       .then((res) => {
-        console.log("correct");
-
-        redirectToExternalUrl(res.data.message);
+        let url = res.data.message;
+        handleCheckout(url);
       })
       .catch((err) => {
-        console.error(err.data);
+        console.log(err);
+
         alert("An error occurred. Please try again.");
       })
       .finally(() => {
@@ -83,7 +85,13 @@ export default function Moniffy() {
         onChangeText={handleAmountChange}
       ></PrimaryInput>
       <PrimaryButton
-        btnText={"Proceed"}
+        btnText={
+          loading ? (
+            <ActivityIndicator size={20} color={"white"}></ActivityIndicator>
+          ) : (
+            "Proceed"
+          )
+        }
         disabled={loading}
         onPress={handleProceed}
       ></PrimaryButton>

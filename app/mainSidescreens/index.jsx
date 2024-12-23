@@ -155,7 +155,7 @@ export default function Dashboard() {
             opacity: 0.9,
           }}
         >
-          {loading && !user ? (
+          {(loading && !user) || user == false ? (
             <ActivityIndicator color={"white"} size={20}></ActivityIndicator>
           ) : (
             `${user?.first_name} ${user?.last_name}`
@@ -177,7 +177,8 @@ export default function Dashboard() {
             marginTop: 5,
           }}
         >
-          ₦ {loading && !user ? "Getting data..." : ""} {user?.balance}
+          ₦ {(loading && !user) || user == false ? "Getting data..." : ""}{" "}
+          {user?.balance}
         </CustomizableMainText>
 
         <View
@@ -238,7 +239,7 @@ export default function Dashboard() {
                 marginTop: 5,
               }}
             >
-              {loading || !user ? (
+              {loading || !user || user == false ? (
                 <ActivityIndicator
                   color={"white"}
                   size={20}
@@ -299,6 +300,7 @@ export default function Dashboard() {
             "Electricity",
             "Education",
             "Cable",
+            "referral",
           ].map((i, index) => {
             let [icon, bgkColor, link] = actionConfig(i);
 

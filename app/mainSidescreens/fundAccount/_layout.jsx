@@ -14,12 +14,14 @@ export default function _layout() {
         name="ManualFunding"
         options={{
           headerTitle: "Manual Funding",
+          headerShown: false,
         }}
       ></Stack.Screen>
       <Stack.Screen
         name="Moniffy"
         options={{
           headerTitle: "Fund with Monnify",
+          headerShown: false,
         }}
       ></Stack.Screen>
     </Stack>

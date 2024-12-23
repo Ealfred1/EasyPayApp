@@ -7,7 +7,7 @@ export default function PrimaryInput(props) {
   return (
     <View
       style={{
-        marginVertical: 10,
+        marginVertical: 20,
       }}
     >
       <Text
