@@ -12,7 +12,7 @@ import Mtn from "../../assets/assets/mtn.svg";
 import Glo from "../../assets/assets/glo.svg";
 import NineMobile from "../../assets/assets/9mobile.svg";
 import PrimaryButton from "../../components/PrimaryButton";
-import ModalDropdown from "react-native-modal-dropdown";
+
 import { Picker } from "@react-native-picker/picker";
 
 import { createAuthAxios } from "@/api/authAxios";
