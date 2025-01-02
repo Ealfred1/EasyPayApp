@@ -22,6 +22,8 @@ import PinPopup from "../../components/PinPopup";
 
 // import { MainHeader } from "../../components/MainHeader";
 export default function BuyData() {
+  console.log(Airtel, "hmm");
+
   const authAxios = createAuthAxios();
   const [selectedNetwork, setSelectedNetwork] = useState(null);
   // const [network, setNetwork] = useState(null);
@@ -285,7 +287,8 @@ export default function BuyData() {
                 opacity: selectedNetwork?.name == item.name ? 1 : 0.5,
               }}
             >
-              {item.logo}
+              {/* {item.logo} */}
+              <Airtel></Airtel>
             </Pressable>
           );
         })}

@@ -29,6 +29,8 @@ export default function PrimaryInput(props) {
           borderRadius: 12,
           borderColor: Colors.secondaryBlue,
           borderWidth: 1,
+          paddingVertical: 10,
+          paddingHorizontal: 5,
         }}
       >
         <TextInput
