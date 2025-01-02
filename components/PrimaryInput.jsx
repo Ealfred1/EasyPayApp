@@ -24,7 +24,7 @@ export default function PrimaryInput(props) {
         style={{
           fontSize: 12,
           borderRadius: 12,
-          backgroundColor: "pink",
+
           borderColor: Colors.secondaryBlue,
           paddingVertical: 10,
           paddingHorizontal: 5,
