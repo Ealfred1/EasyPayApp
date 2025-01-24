@@ -13,10 +13,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage":  "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ayobami.Payverse"
+      "package": "com.ayobami.Payverse",
+      "versionCode": 6
     },
     "web": {
       "bundler": "metro",

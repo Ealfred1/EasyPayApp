@@ -287,8 +287,7 @@ export default function BuyData() {
                 opacity: selectedNetwork?.name == item.name ? 1 : 0.5,
               }}
             >
-              {/* {item.logo} */}
-              <Airtel></Airtel>
+              {item.logo}
             </Pressable>
           );
         })}
