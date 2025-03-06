@@ -9,11 +9,12 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ayobami.Payverse"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage":  "./assets/images/icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.ayobami.Payverse",
@@ -38,7 +39,6 @@
       ],
       "expo-font"
     ],
-    
     "experiments": {
       "typedRoutes": true
     },
