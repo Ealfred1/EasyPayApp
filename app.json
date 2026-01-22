@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Easypay",
-    "slug": "Payverse",
+    "name": "NextOp9ja",
+    "slug": "NextOp9ja",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -10,14 +10,14 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ayobami.Payverse"
+      "bundleIdentifier": "com.ayobami.NextOp9ja"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ayobami.Payverse",
+      "package": "com.ayobami.NextOp9ja",
       "versionCode": 8
     },
     "web": {
