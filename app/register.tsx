@@ -75,6 +75,7 @@ export default function Register() {
     });
 
     setLoading(false); // End loader after registration
+    console.log("")
   };
 
   // OTP Verification handler
