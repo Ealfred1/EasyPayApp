@@ -1,7 +1,13 @@
 import React from "react";
-import { Text } from "react-native";
+import { Text , StyleProp, TextStyle } from "react-native";
 import { Colors } from "@/constants/Colors";
-export default function MainHeader({ children, style }) {
+
+interface MainHeaderProps {
+  children: React.ReactNode;
+  style?: StyleProp<TextStyle>;
+}
+
+export default function MainHeader({ children, style }: MainHeaderProps) {
   return (
     <Text
       style={[

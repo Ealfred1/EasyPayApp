@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { ActivityIndicator, Modal, View } from "react-native";
 import { createAuthAxios } from "@/api/authAxios";
-import { useState } from "react";
 import Toast from "react-native-toast-message";
 import CustomizableMainText from "./CustomizableMainText";
 import PrimaryInput from "./PrimaryInput";

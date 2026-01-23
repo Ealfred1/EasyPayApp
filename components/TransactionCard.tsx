@@ -1,9 +1,8 @@
 import React from "react";
 import Card from "./Card";
-import { PlatformColor, View } from "react-native";
+import { PlatformColor, View , Platform } from "react-native";
 import CustomizableMainText from "./CustomizableMainText";
 import { Fonts } from "../constants/Fonts";
-import { Platform } from "react-native";
 
 import { format } from "date-fns";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
