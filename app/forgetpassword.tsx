@@ -222,7 +222,6 @@ export default function ForgetPassword() {
         >
           <CustomizableMainText
             style={{
-              color: "black",
               textAlign: "center",
               color: Colors.secondaryBlue,
               fontSize: 14,

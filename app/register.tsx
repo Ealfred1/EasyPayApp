@@ -129,7 +129,7 @@ export default function Register() {
             }
           }
         >
-          Easypay
+          NextOp9ja
         </MainHeader>
         <CustomizableMainText
           style={{

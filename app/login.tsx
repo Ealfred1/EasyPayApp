@@ -146,7 +146,7 @@ export default function Login() {
             }
           }
         >
-          Easypay
+          NextOp9ja
         </MainHeader>
         <CustomizableMainText
           style={{
@@ -221,7 +221,7 @@ export default function Login() {
               // opacity: 0.7,
             }}
           >
-            Don't have an account?
+            Don&apos;t have an account?
             <CustomizableMainText
               style={{
                 color: Colors.secondaryBlue,
