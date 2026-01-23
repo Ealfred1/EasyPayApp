@@ -1,16 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import ScreenLayout from "../../../components/ScreenLayout";
-import Card from "../../../components/Card";
-import { Pressable, Text, View } from "react-native";
-import { FontAwesome5, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
-import CustomizableMainText from "../../../components/CustomizableMainText";
-import { Fonts } from "../../../constants/Fonts";
-import MainText from "../../../components/MainText";
-import { Colors } from "../../../constants/Colors";
 import ActionCard from "../../../components/ActionCard";
 import { useRouter } from "expo-router";
 
-export default function fundAccount() {
+export default function FundAccount() {
   const router = useRouter();
   return (
     <ScreenLayout>

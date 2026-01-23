@@ -3,12 +3,11 @@ import ScreenLayout from "../../../components/ScreenLayout";
 import CustomizableMainText from "../../../components/CustomizableMainText";
 import PrimaryInput from "../../../components/PrimaryInput";
 import PrimaryButton from "../../../components/PrimaryButton";
-import MainText from "../../../components/MainText";
 import { Fonts } from "../../../constants/Fonts";
-import { router, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { createAuthAxios } from "../../../api/authAxios";
 import Toast from "react-native-toast-message";
-import { ActivityIndicator, Linking } from "react-native";
+import { ActivityIndicator } from "react-native";
 import { DashboardContext } from "../../../context/DashboardContext";
 
 export default function Moniffy() {
@@ -74,7 +73,7 @@ export default function Moniffy() {
           opacity: 0.6,
         }}
       >
-        Enter an amount and click "Proceed" to be redirected to the checkout
+        Enter an amount and click &quot;Proceed&quot; to be redirected to the checkout
         page, where you can choose to pay with your bank card or via transfer.
       </CustomizableMainText>
       <PrimaryInput
