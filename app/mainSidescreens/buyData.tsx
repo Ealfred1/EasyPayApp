@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { ActivityIndicator, Image, Modal, Text, View } from "react-native";
+import React, { useState , useEffect } from "react";
+import { ActivityIndicator, Image, Modal, Text, View , Pressable } from "react-native";
 import ScreenLayout from "../../components/ScreenLayout";
 import MainHeader from "../../components/MainHeader";
 import CustomizableMainText from "../../components/CustomizableMainText";
 import { Fonts } from "../../constants/Fonts";
-import { Pressable } from "react-native";
 import { Colors } from "../../constants/Colors";
 import PrimaryInput from "../../components/PrimaryInput";
 import Airtel from "../../assets/assets/airtel.svg";
@@ -16,7 +15,6 @@ import PrimaryButton from "../../components/PrimaryButton";
 import { Picker } from "@react-native-picker/picker";
 
 import { createAuthAxios } from "@/api/authAxios";
-import { useEffect } from "react";
 import Toast from "react-native-toast-message";
 import PinPopup from "../../components/PinPopup";
 

@@ -6,8 +6,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-} from "react-native";
-import { View } from "react-native";
+ View } from "react-native";
 import CustomizableMainText from "../../components/CustomizableMainText";
 import { Fonts } from "../../constants/Fonts";
 import PrimaryButton from "../../components/PrimaryButton";
