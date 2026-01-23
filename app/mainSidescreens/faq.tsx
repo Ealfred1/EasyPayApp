@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import ScreenLayout from "../../components/ScreenLayout";
-import { Text } from "react-native";
 import CustomizableMainText from "../../components/CustomizableMainText";
 import QuestionCard from "../../components/QuestionCard";
 import { Fonts } from "../../constants/Fonts";
 import { Colors } from "@/constants/Colors";
 
-export default function faq() {
+export default function Faq() {
   const [openIndex, setOpenIndex] = useState(null);
   return (
     <ScreenLayout>

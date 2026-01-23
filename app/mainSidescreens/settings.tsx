@@ -329,7 +329,6 @@ export default function Settings() {
                 <TouchableOpacity onPress={() => setShowResetPin(true)}>
                   <CustomizableMainText
                     style={{
-                      color: "black",
                       textAlign: "center",
                       color: Colors.secondaryBlue,
                     }}
