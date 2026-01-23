@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState , useContext, useEffect } from "react";
 import {
   ActivityIndicator,
   Dimensions,
@@ -23,13 +23,11 @@ import MainText from "../../components/MainText";
 
 import actionConfig from "../../Utils/DashboardItem";
 import { useRouter } from "expo-router";
-import { useContext, useEffect } from "react";
 
 import { DashboardContext } from "../../context/DashboardContext";
 // import Swal from "sweetalert2"; // SweetAlert2 for modals
 
-import { createAuthAxios } from "@/api/authAxios";
-import authAxios from "@/api/authAxios";
+import authAxios, { createAuthAxios } from "@/api/authAxios";
 import TransactionSection from "../../components/TransactionSection";
 
 export default function Dashboard() {

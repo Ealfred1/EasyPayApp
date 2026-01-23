@@ -4,12 +4,7 @@ import { Drawer } from "expo-router/drawer";
 import { AntDesign, Feather, Ionicons } from "@expo/vector-icons";
 import MainHeader from "../../components/MainHeader";
 import { useNavigationState, useRoute } from "@react-navigation/native";
-export default function _layout() {
-  // const currentRoute = useNavigationState((state) => {
-  //   const routeIndex = state.index;
-  //   return state.routes[routeIndex].name;
-  // });
-  // console.log(currentRoute, "route");
+export default function Layout() {
 
   return (
     <GestureHandlerRootView
@@ -28,7 +23,7 @@ export default function _layout() {
           name="index"
           options={{
             headerTitle: () => {
-              return <MainHeader>EasyPay</MainHeader>;
+              return <MainHeader>NextOp9ja</MainHeader>;
             },
             // title: "Dashboard",
             drawerIcon: ({ color, size, focused }) => {
@@ -116,7 +111,7 @@ export default function _layout() {
             title: "FAQs",
             drawerIcon: ({ color, size, focused }) => {
               return (
-                <AntDesign name="questioncircle" size={size} color={color} />
+                <AntDesign name="questioncircleo" size={size} color={color} />
               );
             },
           }}
