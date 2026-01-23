@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef } from "react";
 import ScreenLayout from "../components/ScreenLayout";
 import PrimaryInput from "../components/PrimaryInput";
 import {
@@ -15,7 +15,6 @@ import { Picker } from "@react-native-picker/picker";
 import { Fonts } from "../constants/Fonts";
 import PrimaryButton from "../components/PrimaryButton";
 import { createAuthAxios } from "@/api/authAxios";
-import { useRef } from "react";
 import PinPopup from "../components/PinPopup";
 import Toast from "react-native-toast-message";
 import CustomizableMainText from "../components/CustomizableMainText";
