@@ -1,9 +1,8 @@
 import { Stack } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import Toast from "react-native-toast-message";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
 // import {
 //   Jost_400Regular,
 //   Jost_700Bold,
