@@ -195,12 +195,12 @@ import { router } from "expo-router";
 
 export const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const [user, setUser] = useState<any>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   // Refresh access token using the refresh token
   const refreshAccessToken = async () => {
@@ -214,7 +214,7 @@ export const AuthProvider = ({ children }) => {
         await AsyncStorage.setItem("accessToken", data.access);
         return data.access;
       }
-    } catch (error) {
+    } catch (error: any) {
       handleTokenError(error);
       return null;
     }
@@ -254,7 +254,7 @@ export const AuthProvider = ({ children }) => {
   }, [scheduleTokenRefresh]);
 
   // Register user
-  const register = async (userData) => {
+  const register = async (userData: any) => {
     try {
       const response = await axiosInstance.post("/users/register/", userData);
       console.log(response);
@@ -266,7 +266,7 @@ export const AuthProvider = ({ children }) => {
         text1: "Registration successful!",
         text2: "OTP sent to your email.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.log("n");
 
       handleError(error);
@@ -274,7 +274,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Verify OTP and log in user
-  const verifyOtp = async (email, otp) => {
+  const verifyOtp = async (email: string, otp: string) => {
     try {
       const response = await axiosInstance.post("/users/verify-otp/", {
         email,
@@ -287,7 +287,7 @@ export const AuthProvider = ({ children }) => {
         text1: "Verification Successful!",
       });
       // navigation.navigate("Dashboard");
-    } catch (error) {
+    } catch (error: any) {
       Toast.show({
         type: "error",
         text1: error.response?.data?.error || "OTP verification failed.",
@@ -296,7 +296,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Log in user (JWT Authentication)
-  const loginUser = async (username, password) => {
+  const loginUser = async (username: string, password: any) => {
     try {
       const { data } = await axiosInstance.post("/users/auth/jwt/create/", {
         username,
@@ -308,7 +308,7 @@ export const AuthProvider = ({ children }) => {
       scheduleTokenRefresh();
 
       router.replace("/mainSidescreens");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error, "stypid");
 
       handleError(error);
@@ -317,7 +317,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Resend OTP
-  const resendOtp = async (email) => {
+  const resendOtp = async (email: string) => {
     console.log(email, "lo");
 
     try {
@@ -328,7 +328,7 @@ export const AuthProvider = ({ children }) => {
         type: "success",
         text1: "OTP resent to your email.",
       });
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
 
       Toast.show({
@@ -353,7 +353,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Handle Errors
-  const handleError = (error) => {
+  const handleError = (error: any) => {
     const errors = error.response?.data || {};
     console.log(errors);
 
@@ -388,7 +388,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Handle token refresh error
-  const handleTokenError = (error) => {
+  const handleTokenError = (error: any) => {
     console.error("Token refresh error:", error);
     setAccessToken(null);
     AsyncStorage.removeItem("accessToken");
