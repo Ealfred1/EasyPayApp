@@ -3,6 +3,16 @@ import { Pressable, Text, View } from "react-native";
 import CustomizableMainText from "./CustomizableMainText";
 import { Fonts } from "../constants/Fonts";
 
+interface PrimaryButtonProps {
+  children?: React.ReactNode;
+  style?: any;
+  btnText: string | React.ReactNode;
+  smallBtn?: boolean;
+  disabled?: boolean;
+  onPress?: () => void;
+  btnbcgstyle?: any;
+}
+
 export default function PrimaryButton({
   children,
   style,
@@ -11,7 +21,7 @@ export default function PrimaryButton({
   disabled,
   onPress,
   btnbcgstyle,
-}) {
+}: PrimaryButtonProps) {
   return (
     <View
       style={[

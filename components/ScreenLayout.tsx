@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, View } from "react-native";
 import React from "react";
-
+// ScreenLayout wrapper
 export default function ScreenLayout({ children, whitebg }: any) {
   return (
     <View

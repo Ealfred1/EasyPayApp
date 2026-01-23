@@ -45,7 +45,7 @@ export default function SecureInput(props: any) {
           style={{
             flex: 1,
             fontSize: 14,
-            fontFamily: Fonts.Regular || "System",
+            fontFamily: Fonts.regularText || "System",
             color: "#1F2937",
             paddingVertical: 10, // Ensure text is centered vertically
           }}

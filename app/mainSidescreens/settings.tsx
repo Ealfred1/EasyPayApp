@@ -11,12 +11,13 @@ import PrimaryInput from "../../components/PrimaryInput";
 import PrimaryButton from "../../components/PrimaryButton";
 import SecureInput from "../../components/SecureInput";
 import Toast from "react-native-toast-message";
+// import { toast } from 'react-toastify';
 import { Fonts } from "../../constants/Fonts";
 export default function Settings() {
   const authAxios = createAuthAxios();
-  const { user, setUser: updateGeneralInfo } = useContext(DashboardContext);
+  const { user, setUser: updateGeneralInfo } = useContext(DashboardContext) as any;
   const [activeTab, setActiveTab] = useState("main");
-  const [selectedTab, setSelectedTab] = useState(null);
+  const [selectedTab, setSelectedTab] = useState<string | null>(null);
   const [showResetPin, setShowResetPin] = useState(false);
 
   // Form data state
@@ -24,6 +25,9 @@ export default function Settings() {
     first_name: user?.first_name || "",
     last_name: user?.last_name || "",
     user_pin: user?.pin,
+    username: user?.username || "",
+    phone_number: user?.phone_number || "",
+    email: user?.email || "",
   });
   const [passwordData, setPasswordData] = useState({
     old_password: "",
@@ -54,7 +58,7 @@ export default function Settings() {
   }, [user]);
   console.log(generalInfo, "user");
 
-  const UpdatePassword = (e) => {
+  const UpdatePassword = (e: any) => {
     authAxios
       .post("/users/auth/users/set_password/", {
         current_password: e.old_password,
@@ -62,7 +66,7 @@ export default function Settings() {
       })
       .then((res) => {
         if (res.status === 204) {
-          toast.success("Password updated successfully");
+          Toast.show({ type: "success", text1: "Password updated successfully" });
         }
       })
       .catch((err) => {
@@ -74,7 +78,7 @@ export default function Settings() {
       });
   };
 
-  const UpdatePin = (e) => {
+  const UpdatePin = (e: any) => {
     if (generalInfo.user_pin == null) {
       authAxios
         .post("/pin/", { action: "create", new_pin: e.new_pin })
@@ -113,7 +117,7 @@ export default function Settings() {
     }
   };
 
-  const ResetPin = (e) => {
+  const ResetPin = (e?: any) => {
     authAxios
       .post("/pin/", {
         action: "reset",
@@ -134,14 +138,14 @@ export default function Settings() {
       );
   };
 
-  const handleGeneralSubmit = (e) => {
+  const handleGeneralSubmit = (e?: any) => {
     updateGeneralInfo(generalInfo);
     Toast.show({
       type: "success",
       text1: "Update Successful",
     });
   };
-  const handlePasswordSubmit = (e) => {
+  const handlePasswordSubmit = (e?: any) => {
     if (passwordData.new_password === passwordData.confirm_password)
       UpdatePassword(passwordData);
     else {
@@ -149,7 +153,7 @@ export default function Settings() {
     }
   };
 
-  const handlePinSubmit = (e) => {
+  const handlePinSubmit = (e?: any) => {
     if (pinData.new_pin === pinData.confirm_pin) UpdatePin(pinData);
     else {
       ToastAndroid.show("Pins don't match!", ToastAndroid.LONG);
@@ -185,7 +189,7 @@ export default function Settings() {
               setSelectedTab("password");
             }}
           >
-            <AntDesign size={30} color={"white"} name="lock1"></AntDesign>
+            <AntDesign size={30} color={"white"} name="lock"></AntDesign>
           </ActionCard>
           <ActionCard
             bgColor={"rgb(254 ,249 ,195)"}
@@ -243,36 +247,36 @@ export default function Settings() {
               <PrimaryInput
                 inputText={"Firstname"}
                 value={generalInfo.first_name}
-                onChangeText={(e) =>
+                onChangeText={(e: string) =>
                   setGeneralInfo({ ...generalInfo, first_name: e })
                 }
               ></PrimaryInput>
               <PrimaryInput
                 inputText={"Lastname"}
                 value={generalInfo.last_name}
-                onChangeText={(e) =>
+                onChangeText={(e: string) =>
                   setGeneralInfo({ ...generalInfo, last_name: e })
                 }
               ></PrimaryInput>
               <PrimaryInput
                 inputText={"Username"}
                 value={generalInfo.username}
-                onChangeText={(e) =>
-                  setGeneralInfo({ ...generalInfo, username: e })
+                onChangeText={(e: string) =>
+                  setGeneralInfo({ ...generalInfo, username: e } as any)
                 }
               ></PrimaryInput>
               <PrimaryInput
                 inputText={"Phone Number"}
                 value={generalInfo.phone_number}
-                onChangeText={(e) =>
-                  setGeneralInfo({ ...generalInfo, phone_number: e })
+                onChangeText={(e: string) =>
+                  setGeneralInfo({ ...generalInfo, phone_number: e } as any)
                 }
               ></PrimaryInput>
               <PrimaryInput
                 inputText={"Email"}
                 value={generalInfo.email}
-                onChangeText={(e) =>
-                  setGeneralInfo({ ...generalInfo, email: e })
+                onChangeText={(e: string) =>
+                  setGeneralInfo({ ...generalInfo, email: e } as any)
                 }
               ></PrimaryInput>
               <PrimaryButton
@@ -298,7 +302,7 @@ export default function Settings() {
                 <PrimaryInput
                   inputText={"Old PIN"}
                   value={pinData.old_pin}
-                  onChangeText={(e) => {
+                  onChangeText={(e: string) => {
                     setPinData({ ...pinData, old_pin: e });
                   }}
                   keyboardType="numeric"
@@ -307,7 +311,7 @@ export default function Settings() {
                 <PrimaryInput
                   inputText={"New PIN"}
                   value={pinData.new_pin}
-                  onChangeText={(e) => {
+                  onChangeText={(e: string) => {
                     setPinData({ ...pinData, new_pin: e });
                   }}
                   keyboardType="numeric"
@@ -316,7 +320,7 @@ export default function Settings() {
                 <PrimaryInput
                   inputText={"Confirm New PIN"}
                   value={pinData.confirm_pin}
-                  onChangeText={(e) => {
+                  onChangeText={(e: string) => {
                     setPinData({ ...pinData, confirm_pin: e });
                   }}
                   keyboardType="numeric"
@@ -324,7 +328,7 @@ export default function Settings() {
                 ></PrimaryInput>
                 <PrimaryButton
                   btnText={"Change PIN"}
-                  onPress={handlePinSubmit}
+                  onPress={() => handlePinSubmit()}
                 ></PrimaryButton>
                 <TouchableOpacity onPress={() => setShowResetPin(true)}>
                   <CustomizableMainText
@@ -352,14 +356,14 @@ export default function Settings() {
                 <SecureInput
                   inputText={"Current Password"}
                   value={resetPinData.password}
-                  onChangeText={(e) => {
+                  onChangeText={(e: string) => {
                     setResetPinData({ ...resetPinData, password: e });
                   }}
                 />
                 <PrimaryInput
                   inputText={"New PIN"}
                   value={resetPinData.new_pin}
-                  onChangeText={(e) => {
+                  onChangeText={(e: string) => {
                     setResetPinData({ ...resetPinData, new_pin: e });
                   }}
                   keyboardType="numeric"
@@ -387,7 +391,7 @@ export default function Settings() {
               <SecureInput
                 inputText={"Old Password"}
                 value={passwordData.old_password}
-                onChangeText={(e) => {
+                onChangeText={(e: string) => {
                   setPasswordData({
                     ...passwordData,
                     old_password: e,
@@ -397,7 +401,7 @@ export default function Settings() {
               <SecureInput
                 inputText={"New Password"}
                 value={passwordData.new_password}
-                onChangeText={(e) => {
+                onChangeText={(e: string) => {
                   setPasswordData({
                     ...passwordData,
                     new_password: e,
@@ -407,7 +411,7 @@ export default function Settings() {
               <SecureInput
                 inputText={"Confirm New Password"}
                 value={passwordData.confirm_password}
-                onChangeText={(e) => {
+                onChangeText={(e: string) => {
                   setPasswordData({
                     ...passwordData,
                     confirm_password: e,

@@ -15,7 +15,7 @@ import MainHeader from "../components/MainHeader";
 export default function Register() {
   const authAxios = createAuthAxios();
   const { loginUser, register, otpSent, verifyOtp, resendOtp } =
-    useContext(AuthContext);
+    useContext(AuthContext) as any;
   const [userData, setUserData] = useState({
     full_name: "",
     username: "",
@@ -33,7 +33,7 @@ export default function Register() {
 
   // Handle changes in input fields
 
-  const handleChange = (e, id) => {
+  const handleChange = (e: string, id: string) => {
     let value = e;
     // const { id, value } = e.target;
     setUserData((prevData) => ({
@@ -47,7 +47,7 @@ export default function Register() {
   };
 
   // Check password strength
-  const checkPasswordStrength = (password) => {
+  const checkPasswordStrength = (password: string) => {
     let strength = 0;
     if (/[a-zA-Z]/.test(password)) strength += 20; // Letters only
     if (/\d/.test(password) && /[a-zA-Z]/.test(password)) strength += 30; // Letters + Numbers
@@ -62,7 +62,7 @@ export default function Register() {
   };
 
   // Register handler
-  const handleRegister = async (e) => {
+  const handleRegister = async () => {
     setLoading(true); // Start loader for registration
     await register({
       first_name: userData.full_name.split(" ")[0],
@@ -79,7 +79,7 @@ export default function Register() {
   };
 
   // OTP Verification handler
-  const handleVerifyOtp = async (e) => {
+  const handleVerifyOtp = async () => {
     setVerifying(true); // Start loader for OTP verification
     await verifyOtp(userData.email, otp);
     loginUser(
@@ -92,7 +92,7 @@ export default function Register() {
 
   // Countdown timer for OTP resend
   useEffect(() => {
-    let timer;
+    let timer: any;
     if (otpSent && countdown > 0) {
       timer = setInterval(() => setCountdown((prev) => prev - 1), 1000);
     } else if (countdown === 0) {
@@ -161,7 +161,7 @@ export default function Register() {
               inputText="OTP"
               keyboardType="numeric"
               maxLength={4}
-              onChangeText={(e) => {
+              onChangeText={(e: string) => {
                 setOtp(e);
               }}
             ></PrimaryInput>
@@ -196,13 +196,13 @@ export default function Register() {
               inputText="Fullname"
               id="full_name"
               value={userData.full_name}
-              onChangeText={(e) => handleChange(e, "full_name")}
+              onChangeText={(e: string) => handleChange(e, "full_name")}
               placeholder="Ayo"
             ></PrimaryInput>
             <PrimaryInput
               inputText="Username"
               value={userData.username}
-              onChangeText={(e) => handleChange(e, "username")}
+              onChangeText={(e: string) => handleChange(e, "username")}
               placeholder="ghostrider"
               id="username"
             ></PrimaryInput>
@@ -211,13 +211,13 @@ export default function Register() {
               value={userData.phone_number}
               keyboardType="numeric"
               placeholder="09132347584"
-              onChangeText={(e) => handleChange(e, "phone_number")}
+              onChangeText={(e: string) => handleChange(e, "phone_number")}
               id="phone_number"
             ></PrimaryInput>
             <PrimaryInput
               inputText="Email"
               value={userData.email}
-              onChangeText={(e) => handleChange(e, "email")}
+              onChangeText={(e: string) => handleChange(e, "email")}
               keyboardType="email-address"
               id="email"
               placeholder="me@you.com"
@@ -225,7 +225,7 @@ export default function Register() {
             <SecureInput
               inputText="Password"
               value={userData.password}
-              onChangeText={(e) => handleChange(e, "password")}
+              onChangeText={(e: string) => handleChange(e, "password")}
               placeholder="invicible***%%"
               id="password"
             ></SecureInput>

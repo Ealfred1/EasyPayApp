@@ -29,7 +29,7 @@ export default function PrimaryInput(props: any) {
         onBlur={() => setIsFocused(false)}
         style={{
           fontSize: 14,
-          fontFamily: Fonts.Regular || "System",
+          fontFamily: Fonts.regularText || "System",
           borderRadius: 12,
           backgroundColor: isFocused ? "#F0F9FF" : "#F9FAFB",
           borderColor: isFocused ? Colors.secondaryBlue : "#E5E7EB",

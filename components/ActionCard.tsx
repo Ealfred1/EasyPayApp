@@ -6,6 +6,17 @@ import { Fonts } from "../constants/Fonts";
 import { Colors } from "../constants/Colors";
 import { AntDesign } from "@expo/vector-icons";
 
+interface ActionCardProps {
+  bgColor: string;
+  borderColor?: string;
+  iconbgColor: string;
+  headerTxt: string;
+  mainTxt: string;
+  children: React.ReactNode;
+  linkTxt?: string;
+  onPress: () => void;
+}
+
 export default function ActionCard({
   bgColor,
   borderColor,
@@ -15,7 +26,7 @@ export default function ActionCard({
   children,
   linkTxt,
   onPress,
-}) {
+}: ActionCardProps) {
   console.log(onPress, "help");
 
   return (
@@ -74,7 +85,7 @@ export default function ActionCard({
                 >
                   {linkTxt}{" "}
                   <AntDesign
-                    name="arrowright"
+                    name="arrow-right"
                     size={12}
                     color={Colors.secondaryBlue}
                   />
