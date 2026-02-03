@@ -14,7 +14,7 @@ const authAxios = axios.create({
 
 // Function to create an instance of authAxios with context
 export const createAuthAxios = () => {
-  const { accessToken, refreshAccessToken, logout } = useContext(AuthContext);
+  const { accessToken, refreshAccessToken, logout } = useContext(AuthContext) as any;
 
   // Set the Authorization header using the access token
   const config = {

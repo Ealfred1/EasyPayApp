@@ -1,8 +1,9 @@
 import React from "react";
 import ScreenLayout from "../../../components/ScreenLayout";
-import { ActionCard } from "../../../components/ActionCard";
+import ActionCard from "../../../components/ActionCard";
 import { FontAwesome5, SimpleLineIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { Colors } from "../../../constants/Colors";
 
 export default function FundAccount() {
   const router = useRouter();

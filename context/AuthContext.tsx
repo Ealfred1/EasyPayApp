@@ -193,14 +193,16 @@ import { useNavigation } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
 import { router } from "expo-router";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext<any>(null);
 
+/* Existing code ... */
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<any>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
   const navigation = useNavigation<any>();
+  const [loading, setLoading] = useState(true); // Persist loading state
 
   // Refresh access token using the refresh token
   const refreshAccessToken = async () => {
@@ -233,20 +235,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // Initial token setup or when the user returns to the app
   useEffect(() => {
     const checkAndRefreshToken = async () => {
-      const refreshToken = await AsyncStorage.getItem("refreshToken");
-      const storedAccessToken = await AsyncStorage.getItem("accessToken");
+      try {
+        const refreshToken = await AsyncStorage.getItem("refreshToken");
+        const storedAccessToken = await AsyncStorage.getItem("accessToken");
 
-      if (!storedAccessToken && refreshToken) {
-        const newAccessToken = await refreshAccessToken();
-        if (newAccessToken) {
-          setAccessToken(newAccessToken);
+        if (!storedAccessToken && refreshToken) {
+          const newAccessToken = await refreshAccessToken();
+          if (newAccessToken) {
+            setAccessToken(newAccessToken);
+            scheduleTokenRefresh();
+          } else {
+            // logout(); // Optional: Don't logout immediately, let guards handle it
+          }
+        } else if (storedAccessToken) {
+          setAccessToken(storedAccessToken);
           scheduleTokenRefresh();
-        } else {
-          logout();
         }
-      } else if (storedAccessToken) {
-        setAccessToken(storedAccessToken);
-        scheduleTokenRefresh();
+      } catch (e) {
+        console.log("Error restoring token", e);
+      } finally {
+        setLoading(false); // Stop loading after check
       }
     };
 
@@ -426,6 +434,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         refreshAccessToken,
         resendOtp,
         logout,
+        loading, // Expose loading
       }}
     >
       {children}

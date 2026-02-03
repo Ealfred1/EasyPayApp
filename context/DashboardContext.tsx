@@ -41,7 +41,7 @@ export const DashboardProvider = ({ children }) => {
       setLoading(false); // If no access token, stop loading
     }
   }, [accessToken]);
-  console.log(user, "fukinguser");
+
 
   return (
     <DashboardContext.Provider value={{ user, setUser, loading }}>

@@ -169,7 +169,7 @@ export default function Login() {
         </CustomizableMainText>
 
         <PrimaryInput
-          inputText="Username"
+          inputText="Username or Email"
           value={username}
           onChangeText={(text: string) => setUsername(text)}
           autoCapitalize="none"
