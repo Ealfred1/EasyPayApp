@@ -65,7 +65,7 @@ export default function ForgetPassword() {
     setLoading(true);
     try {
       const response = await authAxios.post("/users/forgot-password/", {
-        email,
+        email: email.trim().toLowerCase(),
       });
       setMessage(response.data.message);
       Toast.show({
@@ -94,8 +94,8 @@ export default function ForgetPassword() {
     setLoading(true);
     try {
       const response = await authAxios.post("/users/verify-reset-code/", {
-        email,
-        reset_code: resetCode,
+        email: email.trim().toLowerCase(),
+        reset_code: resetCode.trim(),
       });
       setMessage(response.data.message);
       setResetToken(response.data.reset_token);
@@ -163,7 +163,9 @@ export default function ForgetPassword() {
             <PrimaryInput
               inputText="Enter your email"
               value={email}
-              onChangeText={(text) => setEmail(text)}
+              onChangeText={(text: string) => setEmail(text)}
+              autoCapitalize="none"
+              keyboardType="email-address"
             />
             <PrimaryButton
               btnText={loading ? <ActivityIndicator color="white" /> : "Submit"}
@@ -178,7 +180,8 @@ export default function ForgetPassword() {
             <PrimaryInput
               inputText="Enter the reset code"
               value={resetCode}
-              onChangeText={(text) => setResetCode(text)}
+              onChangeText={(text: string) => setResetCode(text)}
+              keyboardType="numeric"
             />
             <PrimaryButton
               btnText={

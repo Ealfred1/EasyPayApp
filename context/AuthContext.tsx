@@ -384,6 +384,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         type: "error",
         text1: error.response.data.detail,
       });
+    } else if (error.response?.status === 500) {
+      Toast.show({
+        type: "error",
+        text1: "Server Error",
+        text2: "Something went wrong on the server. Please try again later.",
+      });
+    } else {
+      // Default fallback
+      Toast.show({
+        type: "error",
+        text1: "An error occurred",
+        text2: error.message || "Please check your connection.",
+      });
     }
   };
 

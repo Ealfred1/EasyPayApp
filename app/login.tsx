@@ -105,6 +105,7 @@ import { router } from "expo-router";
 import { Fonts } from "../constants/Fonts";
 import MainHeader from "../components/MainHeader";
 // import { toast } from "react-toastify"; // Replace with a React Native alternative if needed
+import Toast from "react-native-toast-message";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -112,19 +113,16 @@ export default function Login() {
 
   const [loading, setLoading] = useState(false);
 
-  const { loginUser } = useContext(AuthContext);
+  const { loginUser } = useContext(AuthContext) as any;
 
   const handleLogin = async () => {
     setLoading(true);
     try {
-      await loginUser(username, password, "Login Successful");
+      await loginUser(username.trim().toLowerCase(), password, "Login Successful");
       router.replace("/mainSidescreens"); // Navigate to the dashboard on success
     } catch (error) {
-      // Alert.alert("Error", "Login failed. Please check your credentials.");
-      Toast.show({
-        type: "error",
-        text1: "An error occurred",
-      });
+      // Error handled in AuthContext
+      console.log("Login error caught in component:", error);
     } finally {
       setLoading(false);
     }
@@ -173,13 +171,14 @@ export default function Login() {
         <PrimaryInput
           inputText="Username"
           value={username}
-          onChangeText={(text) => setUsername(text)}
+          onChangeText={(text: string) => setUsername(text)}
+          autoCapitalize="none"
         />
 
         <SecureInput
           inputText="Password"
           value={password}
-          onChangeText={(text) => setPassword(text)}
+          onChangeText={(text: string) => setPassword(text)}
         ></SecureInput>
         <TouchableOpacity
           style={{ alignSelf: "flex-end" }}

@@ -11,6 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 import SecureInput from "../components/SecureInput";
 import { Fonts } from "../constants/Fonts";
 import MainHeader from "../components/MainHeader";
+import Toast from "react-native-toast-message";
 
 export default function Register() {
   const authAxios = createAuthAxios();
@@ -64,12 +65,33 @@ export default function Register() {
   // Register handler
   const handleRegister = async () => {
     setLoading(true); // Start loader for registration
+
+    if (!userData.full_name || userData.full_name.trim() === "") {
+      Toast.show({
+        type: "error",
+        text1: "Validation Error",
+        text2: "Please enter your Full Name",
+      });
+      setLoading(false);
+      return;
+    }
+
+    if (!userData.username || userData.username.trim() === "") {
+      Toast.show({
+        type: "error",
+        text1: "Validation Error",
+        text2: "Please enter a Username",
+      });
+      setLoading(false);
+      return;
+    }
+
     await register({
-      first_name: userData.full_name.split(" ")[0],
-      last_name: userData.full_name.split(" ")[1] || "",
-      phone_number: userData.phone_number,
-      email: userData.email,
-      username: userData.username,
+      first_name: userData.full_name.trim().split(" ")[0],
+      last_name: userData.full_name.trim().split(" ")[1] || "",
+      phone_number: userData.phone_number.trim(),
+      email: userData.email.trim().toLowerCase(),
+      username: userData.username.trim(),
       password: userData.password,
       is_active: false,
     });
@@ -81,9 +103,9 @@ export default function Register() {
   // OTP Verification handler
   const handleVerifyOtp = async () => {
     setVerifying(true); // Start loader for OTP verification
-    await verifyOtp(userData.email, otp);
+    await verifyOtp(userData.email.trim().toLowerCase(), otp.trim());
     loginUser(
-      userData.username,
+      userData.username.trim(),
       userData.password,
       "Redirecting to dashboard..."
     );
@@ -107,7 +129,7 @@ export default function Register() {
 
     setResendEnabled(false); // Disable resend button again
     try {
-      await resendOtp(userData.email);
+      await resendOtp(userData.email.trim().toLowerCase());
       setCountdown(60);
     } catch (error) {
       console.log(error, "fe");
@@ -198,6 +220,7 @@ export default function Register() {
               value={userData.full_name}
               onChangeText={(e: string) => handleChange(e, "full_name")}
               placeholder="Ayo"
+              autoCapitalize="words"
             ></PrimaryInput>
             <PrimaryInput
               inputText="Username"
@@ -205,6 +228,7 @@ export default function Register() {
               onChangeText={(e: string) => handleChange(e, "username")}
               placeholder="ghostrider"
               id="username"
+              autoCapitalize="none"
             ></PrimaryInput>
             <PrimaryInput
               inputText="Phone Number"
@@ -221,6 +245,7 @@ export default function Register() {
               keyboardType="email-address"
               id="email"
               placeholder="me@you.com"
+              autoCapitalize="none"
             ></PrimaryInput>
             <SecureInput
               inputText="Password"
