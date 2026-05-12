@@ -25,6 +25,9 @@ export default function Layout() {
             headerTitle: () => {
               return <MainHeader>NextOp9ja</MainHeader>;
             },
+            headerStyle: {
+              height: 90,
+            },
             // title: "Dashboard",
             drawerIcon: ({ color, size, focused }) => {
               return <Ionicons name="grid-outline" size={size} color={color} />;
