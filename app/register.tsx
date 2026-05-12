@@ -15,7 +15,7 @@ import Toast from "react-native-toast-message";
 
 export default function Register() {
   const authAxios = createAuthAxios();
-  const { loginUser, register, otpSent, verifyOtp, resendOtp } =
+  const { loginUser, register, otpSent, verifyOtp, resendOtp, pendingRegistration } =
     useContext(AuthContext) as any;
   const [userData, setUserData] = useState({
     full_name: "",
@@ -122,6 +122,21 @@ export default function Register() {
     }
     return () => clearInterval(timer);
   }, [otpSent, countdown]);
+
+  // Restore registration form from persisted data after app restart
+  useEffect(() => {
+    if (pendingRegistration && otpSent) {
+      setUserData({
+        full_name: pendingRegistration.full_name || "",
+        username: pendingRegistration.username || "",
+        phone_number: pendingRegistration.phone_number || "",
+        email: pendingRegistration.email || "",
+        password: pendingRegistration.password || "",
+      });
+      setCountdown(60);
+      setResendEnabled(false);
+    }
+  }, []);
 
   // Resend OTP handler
   const handleResendOtp = async () => {

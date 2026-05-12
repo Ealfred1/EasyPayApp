@@ -201,6 +201,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [otpSent, setOtpSent] = useState(false);
   const [otpVerified, setOtpVerified] = useState(false);
+  const [pendingRegistration, setPendingRegistration] = useState<any>(null);
   const navigation = useNavigation<any>();
   const [loading, setLoading] = useState(true); // Persist loading state
 
@@ -251,6 +252,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           setAccessToken(storedAccessToken);
           scheduleTokenRefresh();
         }
+
+        // Restore pending OTP registration if app was killed during verification
+        const pendingRegData = await AsyncStorage.getItem("pendingRegistration");
+        if (pendingRegData) {
+          const parsed = JSON.parse(pendingRegData);
+          setPendingRegistration(parsed);
+          setOtpSent(true);
+        }
       } catch (e) {
         console.log("Error restoring token", e);
       } finally {
@@ -265,18 +274,28 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const register = async (userData: any) => {
     try {
       const response = await axiosInstance.post("/users/register/", userData);
-      console.log(response);
 
       setUser(response.data);
       setOtpSent(true);
+
+      // Persist registration data so it survives app restart/kill
+      const fullName = `${userData.first_name || ""} ${userData.last_name || ""}`.trim();
+      const pendingData = {
+        full_name: fullName,
+        username: userData.username,
+        phone_number: userData.phone_number,
+        email: userData.email,
+        password: userData.password,
+      };
+      await AsyncStorage.setItem("pendingRegistration", JSON.stringify(pendingData));
+      setPendingRegistration(pendingData);
+
       Toast.show({
         type: "success",
         text1: "Registration successful!",
         text2: "OTP sent to your email.",
       });
     } catch (error: any) {
-      console.log("n");
-
       handleError(error);
     }
   };
@@ -313,12 +332,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setAccessToken(data.access);
       await AsyncStorage.setItem("accessToken", data.access);
       await AsyncStorage.setItem("refreshToken", data.refresh);
+
+      // Clear pending OTP registration since the user is now fully logged in
+      await AsyncStorage.removeItem("pendingRegistration");
+      setPendingRegistration(null);
+      setOtpSent(false);
+
       scheduleTokenRefresh();
 
       router.replace("/mainSidescreens");
     } catch (error: any) {
-      console.log(error, "stypid");
-
       handleError(error);
       throw error;
     }
@@ -428,13 +451,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         accessToken,
         otpSent,
         otpVerified,
+        pendingRegistration,
         register,
         verifyOtp,
         loginUser,
         refreshAccessToken,
         resendOtp,
         logout,
-        loading, // Expose loading
+        loading,
       }}
     >
       {children}

@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 import { View, ActivityIndicator } from "react-native";
 
 export default function Index() {
-  const { accessToken, loading } = useContext(AuthContext);
+  const { accessToken, loading, otpSent } = useContext(AuthContext);
 
   if (loading) {
     return (
@@ -16,6 +16,10 @@ export default function Index() {
 
   if (accessToken) {
     return <Redirect href={"/mainSidescreens"} />;
+  }
+
+  if (otpSent) {
+    return <Redirect href={"/register"} />;
   }
 
   return <Redirect href={"/login"} />;
