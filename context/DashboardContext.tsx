@@ -10,11 +10,10 @@ export const DashboardProvider = ({ children }) => {
   const { refreshAccessToken, accessToken, logout } = useContext(AuthContext);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const authAxios = createAuthAxios(); // Create the authAxios instance
+  const [refreshing, setRefreshing] = useState(false);
+  const authAxios = createAuthAxios();
 
   const fetchUserData = async () => {
-    // why were you defining the authAxios inside a non-global function??
-
     try {
       const { data } = await authAxios.get("/users/auth/users/me/");
       setUser(data);
@@ -28,23 +27,29 @@ export const DashboardProvider = ({ children }) => {
           text1: "Failed to fetch user data.",
         });
       }
-      console.error(error);
-    } finally {
-      setLoading(false);
     }
+  };
+
+  const refreshUserData = async () => {
+    setRefreshing(true);
+    await fetchUserData();
+    setRefreshing(false);
   };
 
   useEffect(() => {
     if (accessToken) {
-      fetchUserData();
+      (async () => {
+        await fetchUserData();
+        setLoading(false);
+      })();
     } else {
-      setLoading(false); // If no access token, stop loading
+      setLoading(false);
     }
   }, [accessToken]);
 
 
   return (
-    <DashboardContext.Provider value={{ user, setUser, loading }}>
+    <DashboardContext.Provider value={{ user, setUser, loading, refreshing, refreshUserData }}>
       {children}
     </DashboardContext.Provider>
   );

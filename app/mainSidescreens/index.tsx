@@ -33,7 +33,7 @@ import TransactionSection from "../../components/TransactionSection";
 export default function Dashboard() {
   const authAxios = createAuthAxios();
 
-  const { user, loading } = useContext(DashboardContext);
+  const { user, loading, refreshing, refreshUserData } = useContext(DashboardContext);
   const [isPinModalOpen, setIsPinModalOpen] = useState(false);
   const navigate = useRouter(); // To navigate the user to the settings page
   const router = navigate;
@@ -59,7 +59,7 @@ export default function Dashboard() {
   const itemWidth = Math.floor(screenWidth / itemsPerRow) - 8;
 
   return (
-    <ScreenLayout whitebg={true}>
+    <ScreenLayout whitebg={true} refreshing={refreshing} onRefresh={refreshUserData}>
       <Modal
         visible={isPinModalOpen}
         transparent={true}

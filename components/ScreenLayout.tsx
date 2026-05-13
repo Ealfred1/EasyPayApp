@@ -1,19 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, View } from "react-native";
+import { KeyboardAvoidingView, Platform, RefreshControl, SafeAreaView, ScrollView, View } from "react-native";
 import React from "react";
-// ScreenLayout wrapper
-export default function ScreenLayout({ children, whitebg }: any) {
+
+export default function ScreenLayout({ children, whitebg, refreshing, onRefresh }: any) {
   return (
-    <View
-      style={{
-        flex: 1,
-      }}
-    >
-      <SafeAreaView
-        style={{
-          flex: 1,
-        }}
-      >
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
         <StatusBar style="dark"></StatusBar>
         <KeyboardAvoidingView
           style={{ flex: 1 }}
@@ -23,14 +15,18 @@ export default function ScreenLayout({ children, whitebg }: any) {
             style={{
               flex: 1,
               padding: 10,
-              backgroundColor: "white",
+              backgroundColor: whitebg ? "white" : "#f5f5f5",
             }}
             contentContainerStyle={{
               paddingBottom: 60,
               flexGrow: 1,
-              // backgroundColor: "red",
             }}
             showsVerticalScrollIndicator={false}
+            refreshControl={
+              refreshing !== undefined && onRefresh ? (
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#007BFF" />
+              ) : undefined
+            }
           >
             {children}
           </ScrollView>
