@@ -47,7 +47,7 @@ function CustomDrawerContent({ navigation }: any) {
     <View style={styles.drawerContainer}>
       <View style={styles.drawerHeader}>
         <Image
-          source={require("../../../assets/images/icon.png")}
+          source={require("../../assets/images/icon.png")}
           style={styles.drawerLogo}
         />
         <Text style={styles.drawerTitle}>NextOp9ja</Text>
